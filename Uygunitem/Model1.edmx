@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="uygunitemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alt_kategoriler">
+          <Key>
+            <PropertyRef Name="altkate_id" />
+          </Key>
+          <Property Name="altkate_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="altkate_isim" Type="text" Nullable="false" />
+          <Property Name="üstkate_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cekilen_datalar">
+          <Key>
+            <PropertyRef Name="cekilen_data_id" />
+          </Key>
+          <Property Name="cekilen_data_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cekilen_isim" Type="text" Nullable="false" />
+          <Property Name="cekilen_fiyat" Type="float" Nullable="false" />
+          <Property Name="cekilen_firma" Type="text" Nullable="false" />
+          <Property Name="cekilen_tarih" Type="datetime" Nullable="false" />
+          <Property Name="cekilen_logo" Type="text" Nullable="false" />
+          <Property Name="cekilen_url" Type="text" Nullable="false" />
+          <Property Name="cekilen_durum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="data_siteler">
+          <Key>
+            <PropertyRef Name="data_site_id" />
+          </Key>
+          <Property Name="data_site_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="data_site_url" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="footer">
+          <Key>
+            <PropertyRef Name="satir_id" />
+          </Key>
+          <Property Name="satir_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menu_isim" Type="text" Nullable="false" />
+          <Property Name="menu_href" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hakkimizda">
+          <Key>
+            <PropertyRef Name="satir_id" />
+          </Key>
+          <Property Name="satir_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="satirlar" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hataliUrunler">
+          <Key>
+            <PropertyRef Name="hataliUrun_autoincr" />
+          </Key>
+          <Property Name="hataliUrun_autoincr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hataliUrun_id" Type="int" Nullable="false" />
+          <Property Name="hataliUrun_firma" Type="text" Nullable="false" />
+          <Property Name="hataliUrun_link" Type="text" Nullable="false" />
+          <Property Name="hataliUrun_dbSatir" Type="int" Nullable="false" />
+          <Property Name="hataliUrun_adi" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kategoriler">
+          <Key>
+            <PropertyRef Name="kate_id" />
+          </Key>
+          <Property Name="kate_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kate_isim" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mesaj">
+          <Key>
+            <PropertyRef Name="mesaj_id" />
+          </Key>
+          <Property Name="mesaj_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="text" Nullable="false" />
+          <Property Name="email" Type="text" Nullable="false" />
+          <Property Name="konu" Type="text" Nullable="false" />
+          <Property Name="mesaj" Type="text" Nullable="false" />
+          <Property Name="tarih" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sponsorlar">
+          <Key>
+            <PropertyRef Name="sponsor_autoincr" />
+          </Key>
+          <Property Name="sponsor_autoincr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sponsor_firmalink" Type="text" Nullable="false" />
+          <Property Name="sponsorluk_gunsuresi" Type="int" Nullable="false" />
+          <Property Name="sponsorluk_baslangic" Type="date" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="urunler">
+          <Key>
+            <PropertyRef Name="urun_id" />
+          </Key>
+          <Property Name="urun_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urun_isim" Type="text" Nullable="false" />
+          <Property Name="urun_foto_path" Type="text" Nullable="false" />
+          <Property Name="altkate_id" Type="int" />
+          <Property Name="üstkate_id" Type="int" Nullable="false" />
+          <Property Name="urun_aciklama" Type="text" Nullable="false" />
+          <Property Name="anahtar_kelimeler" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="uruntakip">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanici_mail" Type="text" Nullable="false" />
+          <Property Name="takip_sonfiyat" Type="float" Nullable="false" />
+          <Property Name="takip_tarih" Type="datetime" Nullable="false" />
+          <Property Name="kullanici_isim" Type="text" Nullable="false" />
+          <Property Name="takip_urun" Type="int" Nullable="false" />
+          <Property Name="takip_anahtarkelime" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="yorumlar">
+          <Key>
+            <PropertyRef Name="yorum_id" />
+          </Key>
+          <Property Name="yorum_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urun_id" Type="int" Nullable="false" />
+          <Property Name="yorum" Type="text" Nullable="false" />
+          <Property Name="tarih" Type="datetime" Nullable="false" />
+          <Property Name="mail" Type="text" Nullable="false" />
+          <Property Name="isim" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_alt_kategoriler_kategoriler">
+          <End Role="kategoriler" Type="Self.kategoriler" Multiplicity="1" />
+          <End Role="alt_kategoriler" Type="Self.alt_kategoriler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategoriler">
+              <PropertyRef Name="kate_id" />
+            </Principal>
+            <Dependent Role="alt_kategoriler">
+              <PropertyRef Name="üstkate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_urunler_alt_kategoriler">
+          <End Role="alt_kategoriler" Type="Self.alt_kategoriler" Multiplicity="0..1" />
+          <End Role="urunler" Type="Self.urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alt_kategoriler">
+              <PropertyRef Name="altkate_id" />
+            </Principal>
+            <Dependent Role="urunler">
+              <PropertyRef Name="altkate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_urunler_kategoriler">
+          <End Role="kategoriler" Type="Self.kategoriler" Multiplicity="1" />
+          <End Role="urunler" Type="Self.urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategoriler">
+              <PropertyRef Name="kate_id" />
+            </Principal>
+            <Dependent Role="urunler">
+              <PropertyRef Name="üstkate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="uygunitemModelStoreContainer">
+          <EntitySet Name="alt_kategoriler" EntityType="Self.alt_kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cekilen_datalar" EntityType="Self.cekilen_datalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="data_siteler" EntityType="Self.data_siteler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="footer" EntityType="Self.footer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hakkimizda" EntityType="Self.hakkimizda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hataliUrunler" EntityType="Self.hataliUrunler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kategoriler" EntityType="Self.kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mesaj" EntityType="Self.mesaj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sponsorlar" EntityType="Self.sponsorlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="urunler" EntityType="Self.urunler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="uruntakip" EntityType="Self.uruntakip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="yorumlar" EntityType="Self.yorumlar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_alt_kategoriler_kategoriler" Association="Self.FK_alt_kategoriler_kategoriler">
+            <End Role="kategoriler" EntitySet="kategoriler" />
+            <End Role="alt_kategoriler" EntitySet="alt_kategoriler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_urunler_alt_kategoriler" Association="Self.FK_urunler_alt_kategoriler">
+            <End Role="alt_kategoriler" EntitySet="alt_kategoriler" />
+            <End Role="urunler" EntitySet="urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_urunler_kategoriler" Association="Self.FK_urunler_kategoriler">
+            <End Role="kategoriler" EntitySet="kategoriler" />
+            <End Role="urunler" EntitySet="urunler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="uygunitemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alt_kategoriler">
+          <Key>
+            <PropertyRef Name="altkate_id" />
+          </Key>
+          <Property Name="altkate_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="altkate_isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="üstkate_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="kategoriler" Relationship="Self.FK_alt_kategoriler_kategoriler" FromRole="alt_kategoriler" ToRole="kategoriler" />
+          <NavigationProperty Name="urunler" Relationship="Self.FK_urunler_alt_kategoriler" FromRole="alt_kategoriler" ToRole="urunler" />
+        </EntityType>
+        <EntityType Name="cekilen_datalar">
+          <Key>
+            <PropertyRef Name="cekilen_data_id" />
+          </Key>
+          <Property Name="cekilen_data_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cekilen_isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cekilen_fiyat" Type="Double" Nullable="false" />
+          <Property Name="cekilen_firma" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cekilen_tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cekilen_logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cekilen_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cekilen_durum" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="data_siteler">
+          <Key>
+            <PropertyRef Name="data_site_id" />
+          </Key>
+          <Property Name="data_site_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data_site_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="footer">
+          <Key>
+            <PropertyRef Name="satir_id" />
+          </Key>
+          <Property Name="satir_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menu_isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="menu_href" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hakkimizda">
+          <Key>
+            <PropertyRef Name="satir_id" />
+          </Key>
+          <Property Name="satir_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="satirlar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hataliUrunler">
+          <Key>
+            <PropertyRef Name="hataliUrun_autoincr" />
+          </Key>
+          <Property Name="hataliUrun_autoincr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hataliUrun_id" Type="Int32" Nullable="false" />
+          <Property Name="hataliUrun_firma" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hataliUrun_link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hataliUrun_dbSatir" Type="Int32" Nullable="false" />
+          <Property Name="hataliUrun_adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kategoriler">
+          <Key>
+            <PropertyRef Name="kate_id" />
+          </Key>
+          <Property Name="kate_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kate_isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alt_kategoriler" Relationship="Self.FK_alt_kategoriler_kategoriler" FromRole="kategoriler" ToRole="alt_kategoriler" />
+          <NavigationProperty Name="urunler" Relationship="Self.FK_urunler_kategoriler" FromRole="kategoriler" ToRole="urunler" />
+        </EntityType>
+        <EntityType Name="mesaj">
+          <Key>
+            <PropertyRef Name="mesaj_id" />
+          </Key>
+          <Property Name="mesaj_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="konu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mesaj1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tarih" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="sponsorlar">
+          <Key>
+            <PropertyRef Name="sponsor_autoincr" />
+          </Key>
+          <Property Name="sponsor_autoincr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sponsor_firmalink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sponsorluk_gunsuresi" Type="Int32" Nullable="false" />
+          <Property Name="sponsorluk_baslangic" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="urunler">
+          <Key>
+            <PropertyRef Name="urun_id" />
+          </Key>
+          <Property Name="urun_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urun_isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="urun_foto_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="altkate_id" Type="Int32" />
+          <Property Name="üstkate_id" Type="Int32" Nullable="false" />
+          <Property Name="urun_aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="anahtar_kelimeler" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alt_kategoriler" Relationship="Self.FK_urunler_alt_kategoriler" FromRole="urunler" ToRole="alt_kategoriler" />
+          <NavigationProperty Name="kategoriler" Relationship="Self.FK_urunler_kategoriler" FromRole="urunler" ToRole="kategoriler" />
+        </EntityType>
+        <EntityType Name="uruntakip">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanici_mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="takip_sonfiyat" Type="Double" Nullable="false" />
+          <Property Name="takip_tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="kullanici_isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="takip_urun" Type="Int32" Nullable="false" />
+          <Property Name="takip_anahtarkelime" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="yorumlar">
+          <Key>
+            <PropertyRef Name="yorum_id" />
+          </Key>
+          <Property Name="yorum_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urun_id" Type="Int32" Nullable="false" />
+          <Property Name="yorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_alt_kategoriler_kategoriler">
+          <End Role="kategoriler" Type="Self.kategoriler" Multiplicity="1" />
+          <End Role="alt_kategoriler" Type="Self.alt_kategoriler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategoriler">
+              <PropertyRef Name="kate_id" />
+            </Principal>
+            <Dependent Role="alt_kategoriler">
+              <PropertyRef Name="üstkate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_urunler_alt_kategoriler">
+          <End Role="alt_kategoriler" Type="Self.alt_kategoriler" Multiplicity="0..1" />
+          <End Role="urunler" Type="Self.urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alt_kategoriler">
+              <PropertyRef Name="altkate_id" />
+            </Principal>
+            <Dependent Role="urunler">
+              <PropertyRef Name="altkate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_urunler_kategoriler">
+          <End Role="kategoriler" Type="Self.kategoriler" Multiplicity="1" />
+          <End Role="urunler" Type="Self.urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategoriler">
+              <PropertyRef Name="kate_id" />
+            </Principal>
+            <Dependent Role="urunler">
+              <PropertyRef Name="üstkate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="uygunitemdb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alt_kategoriler" EntityType="Self.alt_kategoriler" />
+          <EntitySet Name="cekilen_datalar" EntityType="Self.cekilen_datalar" />
+          <EntitySet Name="data_siteler" EntityType="Self.data_siteler" />
+          <EntitySet Name="footer" EntityType="Self.footer" />
+          <EntitySet Name="hakkimizda" EntityType="Self.hakkimizda" />
+          <EntitySet Name="hataliUrunler" EntityType="Self.hataliUrunler" />
+          <EntitySet Name="kategoriler" EntityType="Self.kategoriler" />
+          <EntitySet Name="mesaj" EntityType="Self.mesaj" />
+          <EntitySet Name="sponsorlar" EntityType="Self.sponsorlar" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="urunler" EntityType="Self.urunler" />
+          <EntitySet Name="uruntakip" EntityType="Self.uruntakip" />
+          <EntitySet Name="yorumlar" EntityType="Self.yorumlar" />
+          <AssociationSet Name="FK_alt_kategoriler_kategoriler" Association="Self.FK_alt_kategoriler_kategoriler">
+            <End Role="kategoriler" EntitySet="kategoriler" />
+            <End Role="alt_kategoriler" EntitySet="alt_kategoriler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_urunler_alt_kategoriler" Association="Self.FK_urunler_alt_kategoriler">
+            <End Role="alt_kategoriler" EntitySet="alt_kategoriler" />
+            <End Role="urunler" EntitySet="urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_urunler_kategoriler" Association="Self.FK_urunler_kategoriler">
+            <End Role="kategoriler" EntitySet="kategoriler" />
+            <End Role="urunler" EntitySet="urunler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="uygunitemModelStoreContainer" CdmEntityContainer="uygunitemdb">
+          <EntitySetMapping Name="alt_kategoriler">
+            <EntityTypeMapping TypeName="uygunitemModel.alt_kategoriler">
+              <MappingFragment StoreEntitySet="alt_kategoriler">
+                <ScalarProperty Name="altkate_id" ColumnName="altkate_id" />
+                <ScalarProperty Name="altkate_isim" ColumnName="altkate_isim" />
+                <ScalarProperty Name="üstkate_id" ColumnName="üstkate_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cekilen_datalar">
+            <EntityTypeMapping TypeName="uygunitemModel.cekilen_datalar">
+              <MappingFragment StoreEntitySet="cekilen_datalar">
+                <ScalarProperty Name="cekilen_data_id" ColumnName="cekilen_data_id" />
+                <ScalarProperty Name="cekilen_isim" ColumnName="cekilen_isim" />
+                <ScalarProperty Name="cekilen_fiyat" ColumnName="cekilen_fiyat" />
+                <ScalarProperty Name="cekilen_firma" ColumnName="cekilen_firma" />
+                <ScalarProperty Name="cekilen_tarih" ColumnName="cekilen_tarih" />
+                <ScalarProperty Name="cekilen_logo" ColumnName="cekilen_logo" />
+                <ScalarProperty Name="cekilen_url" ColumnName="cekilen_url" />
+                <ScalarProperty Name="cekilen_durum" ColumnName="cekilen_durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="data_siteler">
+            <EntityTypeMapping TypeName="uygunitemModel.data_siteler">
+              <MappingFragment StoreEntitySet="data_siteler">
+                <ScalarProperty Name="data_site_id" ColumnName="data_site_id" />
+                <ScalarProperty Name="data_site_url" ColumnName="data_site_url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="footer">
+            <EntityTypeMapping TypeName="uygunitemModel.footer">
+              <MappingFragment StoreEntitySet="footer">
+                <ScalarProperty Name="satir_id" ColumnName="satir_id" />
+                <ScalarProperty Name="menu_isim" ColumnName="menu_isim" />
+                <ScalarProperty Name="menu_href" ColumnName="menu_href" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hakkimizda">
+            <EntityTypeMapping TypeName="uygunitemModel.hakkimizda">
+              <MappingFragment StoreEntitySet="hakkimizda">
+                <ScalarProperty Name="satir_id" ColumnName="satir_id" />
+                <ScalarProperty Name="satirlar" ColumnName="satirlar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hataliUrunler">
+            <EntityTypeMapping TypeName="uygunitemModel.hataliUrunler">
+              <MappingFragment StoreEntitySet="hataliUrunler">
+                <ScalarProperty Name="hataliUrun_autoincr" ColumnName="hataliUrun_autoincr" />
+                <ScalarProperty Name="hataliUrun_id" ColumnName="hataliUrun_id" />
+                <ScalarProperty Name="hataliUrun_firma" ColumnName="hataliUrun_firma" />
+                <ScalarProperty Name="hataliUrun_link" ColumnName="hataliUrun_link" />
+                <ScalarProperty Name="hataliUrun_dbSatir" ColumnName="hataliUrun_dbSatir" />
+                <ScalarProperty Name="hataliUrun_adi" ColumnName="hataliUrun_adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kategoriler">
+            <EntityTypeMapping TypeName="uygunitemModel.kategoriler">
+              <MappingFragment StoreEntitySet="kategoriler">
+                <ScalarProperty Name="kate_id" ColumnName="kate_id" />
+                <ScalarProperty Name="kate_isim" ColumnName="kate_isim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mesaj">
+            <EntityTypeMapping TypeName="uygunitemModel.mesaj">
+              <MappingFragment StoreEntitySet="mesaj">
+                <ScalarProperty Name="mesaj_id" ColumnName="mesaj_id" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="konu" ColumnName="konu" />
+                <ScalarProperty Name="mesaj1" ColumnName="mesaj" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sponsorlar">
+            <EntityTypeMapping TypeName="uygunitemModel.sponsorlar">
+              <MappingFragment StoreEntitySet="sponsorlar">
+                <ScalarProperty Name="sponsor_autoincr" ColumnName="sponsor_autoincr" />
+                <ScalarProperty Name="sponsor_firmalink" ColumnName="sponsor_firmalink" />
+                <ScalarProperty Name="sponsorluk_gunsuresi" ColumnName="sponsorluk_gunsuresi" />
+                <ScalarProperty Name="sponsorluk_baslangic" ColumnName="sponsorluk_baslangic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="uygunitemModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="urunler">
+            <EntityTypeMapping TypeName="uygunitemModel.urunler">
+              <MappingFragment StoreEntitySet="urunler">
+                <ScalarProperty Name="urun_id" ColumnName="urun_id" />
+                <ScalarProperty Name="urun_isim" ColumnName="urun_isim" />
+                <ScalarProperty Name="urun_foto_path" ColumnName="urun_foto_path" />
+                <ScalarProperty Name="altkate_id" ColumnName="altkate_id" />
+                <ScalarProperty Name="üstkate_id" ColumnName="üstkate_id" />
+                <ScalarProperty Name="urun_aciklama" ColumnName="urun_aciklama" />
+                <ScalarProperty Name="anahtar_kelimeler" ColumnName="anahtar_kelimeler" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uruntakip">
+            <EntityTypeMapping TypeName="uygunitemModel.uruntakip">
+              <MappingFragment StoreEntitySet="uruntakip">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kullanici_mail" ColumnName="kullanici_mail" />
+                <ScalarProperty Name="takip_sonfiyat" ColumnName="takip_sonfiyat" />
+                <ScalarProperty Name="takip_tarih" ColumnName="takip_tarih" />
+                <ScalarProperty Name="kullanici_isim" ColumnName="kullanici_isim" />
+                <ScalarProperty Name="takip_urun" ColumnName="takip_urun" />
+                <ScalarProperty Name="takip_anahtarkelime" ColumnName="takip_anahtarkelime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="yorumlar">
+            <EntityTypeMapping TypeName="uygunitemModel.yorumlar">
+              <MappingFragment StoreEntitySet="yorumlar">
+                <ScalarProperty Name="yorum_id" ColumnName="yorum_id" />
+                <ScalarProperty Name="urun_id" ColumnName="urun_id" />
+                <ScalarProperty Name="yorum" ColumnName="yorum" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="isim" ColumnName="isim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

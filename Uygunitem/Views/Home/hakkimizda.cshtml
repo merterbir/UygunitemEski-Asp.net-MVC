@@ -1,0 +1,20 @@
+﻿@model Uygunitem.Models.ViewModel
+<div style="border-width:5px;border-style:solid;">
+    <br>
+    <h3 style="text-align:center; color:red">
+        HAKKIMIZDA
+    </h3>
+    <br>
+    @foreach (var item in Model.hakkimizda)
+    {
+        <br>
+        <h4 style="text-align:center;">
+            @item.satirlar
+        </h4>
+    }
+    <br>
+    <h3 style="text-align:left; color:darkcyan">
+        Uygunitem.com Yönetimi
+    </h3>
+    <br>
+</div>

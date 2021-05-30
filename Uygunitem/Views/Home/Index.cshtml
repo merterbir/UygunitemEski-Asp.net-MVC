@@ -1,0 +1,56 @@
+﻿@model Uygunitem.Models.ViewModel
+
+<!--carousel====================================================================== -->
+@section carouselBlk{
+
+
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="container">
+                    <a href="register.html"><img style="width:100%" src="~/themes/images/carousel/foto2.jpeg" alt="" /></a>
+                    <div class="carousel-caption">
+                        <h4>Second Thumbnail label</h4>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item">
+                <div width="2808px" height="200px" class="container">
+                    <a href="register.html"><img style="width:100%" src="~/themes/images/carousel/photo.jpeg" alt="" /></a>
+                    <div class="carousel-caption">
+                        <h4>Second Thumbnail label</h4>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+    
+}
+<!--carousel bitiş====================================================================== -->
+<h4>ÖNE ÇIKANLAR </h4>
+<ul class="thumbnails">
+
+
+    @foreach (var urun in Model.urunler)
+    {
+        <li class="span3">
+            <div class="thumbnail">
+                <a href="~/Home/arama"><img src="~/@urun.urun_foto_path" style="width:150px;height:150px" /></a>
+                <div class="caption">
+                    <h5>@urun.urun_isim</h5>
+                    <h4 style="text-align:center"><a class="btn" href="~/Home/urunDetay/@urun.urun_id">  <i class="icon-zoom-in"></i> İNCELE</a> </h4>
+                </div>
+            </div>
+        </li>
+    }
+
+
+</ul>

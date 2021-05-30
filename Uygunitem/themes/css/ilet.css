@@ -1,0 +1,91 @@
+
+.modal-body1 {
+  display:flex;
+  padding: 0;
+  border-radius: 4rem;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.modal-content1 {
+
+  border-radius: 4rem;
+  width: 140%;
+  -webkit-box-shadow: -1px -2px 42px -19px rgba(64,64,64);
+-moz-box-shadow: -1px -2px 42px -19px rgba(64,64,64);
+box-shadow: -1px -2px 42px -19px rgba(64,64,64);
+}
+
+.modal-content1 h1 {
+
+  font-size: 1.3em;
+  text-transform: uppercase;
+}
+
+.modal-content1 h2 {
+    font-size: 1.1em;
+}
+.modal-content1 h3 {
+  font-size: .8em;
+  letter-spacing: 2px;
+}
+
+.column1 {
+  flex: 50%;
+  padding: 10px;
+}
+
+.column1#main1 {
+  flex: 75%;
+  padding: 50px;
+  margin-top: 30px;
+  margin-left: 15px;
+}
+
+#secondary {
+  background-color: #404040;
+  border-radius: 0 4rem 4rem 0;
+  Color:white;
+}
+
+#main1 .form-control {
+ border-style:groove;
+  border-radius: 0;
+  font-size: .9em;
+}
+.ada {
+border-style:groove;
+}
+
+.btn1 {
+
+  text-transform: uppercase;
+  border-radius: .15rem;
+  
+  padding: .150rem .75rem;
+  
+  font-family: 'PT Sans', sans-serif;
+  letter-spacing: 2px;
+}
+
+
+
+.btn-primary1:hover {
+  border-color: rgba( 255, 255, 255, 0);
+}
+
+#main1 .btn-primary1 {
+  width: 100%;
+}
+#secondary .btn-primary1 {
+  background: #404040;
+  color: #000;
+}
+.modal-body label {
+	
+  margin-bottom: 0;
+}
+
+.sec-content {
+ 	font-family: 'PT Sans', sans-serif;
+  margin-top: 85%;
+}

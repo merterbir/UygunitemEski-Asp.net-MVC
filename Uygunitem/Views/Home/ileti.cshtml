@@ -1,0 +1,49 @@
+﻿@model Uygunitem.Models.ViewModel
+
+
+<div align="center">
+    <div class="contact100-pic js-tilt" data-tilt>
+        <img src="~/themes/images/img-01.png" alt="IMG">
+    </div>
+
+    <form class="contact100-form validate-form" action="~/Home/ileti" method="post">
+        <span class="contact100-form-title">
+
+        </span>
+
+        <div class="wrap-input100 validate-input" data-validate="Name is required">
+            <input class="input100" type="text" name="ad" placeholder="İsim">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+            <input class="input100" type="text" name="email" placeholder="E-mail">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </span>
+        </div>
+        <div class="wrap-input100 validate-input" >
+            <input class="input100" type="text" name="konu" placeholder="Konu">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-telegram" ></i>
+            </span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Message is required">
+            <textarea class="input100" style="resize:none" name="message" placeholder="Mesaj"></textarea>
+            <span class="focus-input100"></span>
+        </div>
+
+        <div class="container-contact100-form-btn">
+            <button class="contact100-form-btn">
+                GÖNDER
+            </button>
+        </div>
+    </form>
+
+</div>

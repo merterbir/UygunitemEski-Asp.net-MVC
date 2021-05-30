@@ -1,0 +1,46 @@
+﻿@model Uygunitem.Models.ViewModel
+@if (@Model.alt_kategoriler.Where(x => x.altkate_id == Model.id).Count() != 0)
+{
+    <h4> @Model.alt_kategoriler.Where(x => x.altkate_id == Model.id).Select(x => x.altkate_isim).FirstOrDefault() Kategorisine ait ürünler listeleniyor </h4>
+    <br>
+        <ul class="thumbnails">
+            @foreach (var urun in Model.urunler.Where(x => x.altkate_id == Model.id))
+            {
+                <li class="span3">
+                    <div class="thumbnail">
+                        <a href="~/Home/arama"><img src="~/@urun.urun_foto_path" alt="" /></a>
+                        <div class="caption">
+                            <h5>@urun.urun_isim</h5>
+                            <h4 style="text-align:center"><a class="btn" href="~/Home/urunDetay/@urun.urun_id">  <i class="icon-zoom-in"></i> İNCELE</a> </h4>
+                        </div>
+                    </div>
+                </li>
+
+            }
+        </ul>
+
+        if (Model.urunler.Where(x => x.altkate_id == Model.id).Count() == 0)
+        {
+
+        <div class="caption">
+            <br>
+            <br>
+            <img style="width:25%; display:block; margin: 0 auto;" src="~/themes/images/sadrobot.jpg" />
+            <h3 style="text-align:center">Üzgünüm, bu kategoride şuanlık ürün yok :/</h3>
+        </div>
+        }
+        }
+        else
+        {
+        <div class="caption">
+            <br>
+            <br>
+            <img style="width:25%; display:block; margin: 0 auto;" src="~/themes/images/sadrobot.jpg" />
+            <h3 style="text-align:center">Üzgünüm, şuanlık böyle bir kategori yok :/</h3>
+        </div>
+
+        }
+
+
+
+

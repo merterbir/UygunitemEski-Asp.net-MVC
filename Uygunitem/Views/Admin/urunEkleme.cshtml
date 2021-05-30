@@ -1,0 +1,71 @@
+﻿@model Uygunitem.Models.ViewModel
+@{
+    ViewBag.Title = "urunEkleme";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="testbox">
+  
+
+
+     <fieldset>
+        @using (Html.BeginForm("fotoYukleme", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" , @class = "urunEkle" }))
+        {
+
+            <legend>ÜRÜN EKLEME FORMU </legend>
+            <div class="item">
+                <label for="name">ÜRÜN ADI<span>*</span></label>
+                <input id="name" type="text" name="ürün_adi" placeholder="Ürün Adı Giriniz." required />
+            </div>
+            <div class="item">
+                <label for="name">ÜRÜN ANAHTAR KELİMELERİ<span>*</span></label>
+                <input id="name" type="text" name="ürün_anahtar" placeholder="Her anahtar kelimeyi ' , ' (VİRGÜL) ile ayırınız." required />
+            </div>
+            <div class="item">
+                <label for="address">AÇIKLAMA<span>*</span></label><br />
+                <textarea name="ürün_aciklama" rows="5" cols="226" placeholder="AÇIKLAMA" id="address" required></textarea>
+            </div>
+
+            <div class="item">
+                <div class="name-item">
+                    <div>
+                        <select name="select1" id="select1" required>
+                            <option selected value="" disabled>Üst Kategori</option>
+                            @foreach (var item in Model.kategoriler)
+                            {
+                                <option value="@item.kate_id">@item.kate_isim</option>
+                            }
+
+                        </select>
+                    </div>
+                    <div>
+
+                       
+                        <select name="select2" id="select2" required>
+                            <option selected value="" disabled>Alt Kategori</option>
+                            @foreach (var item in Model.alt_kategoriler)
+                            {
+                          <option value="@item.altkate_id">@item.altkate_isim</option>
+                         }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <label for="file">Ürün Fotoğrafı Yükleyiniz:</label>
+            <input type="file" name="file" id="file" required /><br><br>
+            if (ViewBag.Message == "Ürün Ekleme Başarılı!")
+            {
+                <h3 style="color:greenyellow">@ViewBag.Message</h3>
+            }
+            else
+            {
+                <h3 style="color:red">@ViewBag.Message</h3>
+            }
+            <div class="btn-block">
+                 <button type="submit" value="Upload Image">APPLY</button>
+            </div>                                
+        }
+
+          </fieldset>
+                                               
+</div>
