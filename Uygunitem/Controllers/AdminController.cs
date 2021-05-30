@@ -40,6 +40,20 @@ namespace Uygunitem.Controllers
             viewModel.hataliUrunler = db.hataliUrunler.ToList();
             return View(viewModel);
         }
+        public ActionResult urunDuzenleme()
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.urunler = db.urunler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.cekilen_datalar = db.cekilen_datalar.ToList();
+            viewModel.sponsorlar = db.sponsorlar.ToList();
+            viewModel.uruntakip = db.uruntakip.ToList();
+            viewModel.footer = db.footer.ToList();
+            viewModel.yorumlar = db.yorumlar.ToList();
+            viewModel.hataliUrunler = db.hataliUrunler.ToList();
+            return View(viewModel);
+        }
         [HttpPost]
         public ActionResult fotoYukleme(HttpPostedFileBase file,FormCollection form)
         {
