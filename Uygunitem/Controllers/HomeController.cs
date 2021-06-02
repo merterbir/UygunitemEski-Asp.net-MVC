@@ -23,7 +23,7 @@ namespace Uygunitem.Controllers
 
             return View(viewModel);
         }
-      
+
         public ActionResult _Layout()
         {
             ViewModel viewModel = new ViewModel();
@@ -40,7 +40,7 @@ namespace Uygunitem.Controllers
 
             return View(viewModel);
         }
-        public ActionResult kategoriler(int id=0)
+        public ActionResult kategoriler(int id = 0)
         {
             ViewModel viewModel = new ViewModel();
             viewModel.kategoriler = db.kategoriler.ToList();
@@ -50,8 +50,8 @@ namespace Uygunitem.Controllers
             viewModel.footer = db.footer.ToList();
 
             return View("kategoriler", viewModel);
-            
-            
+
+
         }
         public ActionResult hakkimizda()
         {
@@ -109,17 +109,17 @@ namespace Uygunitem.Controllers
             {
                 viewModel.anahtarKelimeler = urunKontrol.parcala(db.urunler.Where(x => x.urun_id == id).Select(x => x.anahtar_kelimeler).FirstOrDefault());
             }
-           // viewModel.firmalar = db.cekilen_datalar.Where(x => viewModel.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).Where(x => x.cekilen_durum == 1).Select(x => x.cekilen_firma).ToList();
+            // viewModel.firmalar = db.cekilen_datalar.Where(x => viewModel.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).Where(x => x.cekilen_durum == 1).Select(x => x.cekilen_firma).ToList();
 
 
 
             return View("urunDetay", viewModel);
         }
         [HttpPost]
-        public ActionResult urunDetay(FormCollection yorumform , int id = 0)
+        public ActionResult urunDetay(FormCollection yorumform, int id = 0)
         {
             yorumlar model = new yorumlar();
-            
+
             model.isim = yorumform["yorum_ad"].Trim();
             model.mail = yorumform["yorum_email"].Trim();
             model.yorum = yorumform["yorum_yorum"].Trim();
@@ -142,23 +142,15 @@ namespace Uygunitem.Controllers
                 viewModel.anahtarKelimeler = urunKontrol.parcala(db.urunler.Where(x => x.urun_id == id).Select(x => x.anahtar_kelimeler).FirstOrDefault());
             }
 
-            
-            return View("urunDetay", viewModel);
+
+            return RedirectToAction("urunDetay", new { id = id });
 
         }
 
         [HttpPost]
-        public ActionResult urunTakip(FormCollection takipform ,float fiyat, int id,string anahtarkelimeler)
+        public ActionResult urunTakip(FormCollection takipform, int id)
         {
-            uruntakip model = new uruntakip();
-            model.kullanici_isim = takipform["takip_ad"].Trim();
-            model.kullanici_mail = takipform["takip_email"].Trim();
-            model.takip_tarih = DateTime.Now;
-            model.takip_urun = id;
-            model.takip_sonfiyat = fiyat;
-            model.takip_anahtarkelime = anahtarkelimeler;
-            db.uruntakip.Add(model);
-            db.SaveChanges();
+            
             ViewModel viewModel = new ViewModel();
             viewModel.kategoriler = db.kategoriler.ToList();
             viewModel.urunler = db.urunler.ToList();
@@ -174,12 +166,20 @@ namespace Uygunitem.Controllers
             {
                 viewModel.anahtarKelimeler = urunKontrol.parcala(db.urunler.Where(x => x.urun_id == id).Select(x => x.anahtar_kelimeler).FirstOrDefault());
             }
-            
-            
+            uruntakip model = new uruntakip();
+            model.kullanici_isim = takipform["takip_ad"].Trim();
+            model.kullanici_mail = takipform["takip_email"].Trim();
+            model.takip_tarih = DateTime.Now;
+            model.takip_urun = id;
+            model.takip_sonfiyat = viewModel.cekilen_datalar.Where(x => viewModel.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).Where(x => x.cekilen_durum == 1).OrderBy(x => x.cekilen_fiyat).Select(x => x.cekilen_fiyat).FirstOrDefault();
+            model.takip_anahtarkelime = db.urunler.Where(x => x.urun_id == id).Select(x => x.anahtar_kelimeler).FirstOrDefault();
+            db.uruntakip.Add(model);
+            db.SaveChanges();
+
             return RedirectToAction("urunDetay",new {id = id});
         }
         [HttpPost]
-        public ActionResult hataliUrun(string urunAdi,int dbSatir, int id,string firma, string link)
+        public ActionResult hataliUrun(int dbSatir, int id)
         {
             ViewModel viewModel = new ViewModel();
             viewModel.kategoriler = db.kategoriler.ToList();
@@ -200,16 +200,16 @@ namespace Uygunitem.Controllers
             {
                 hataliUrunler model = new hataliUrunler();
                 model.hataliUrun_dbSatir = dbSatir;
-                model.hataliUrun_firma = firma;
+                model.hataliUrun_firma = db.cekilen_datalar.Where(x=> x.cekilen_data_id == dbSatir).Where(x => x.cekilen_durum == 1).Select(x => x.cekilen_firma).FirstOrDefault();
                 model.hataliUrun_id = id;
-                model.hataliUrun_link = link;
-                model.hataliUrun_adi = urunAdi;
+                model.hataliUrun_link = db.cekilen_datalar.Where(x => x.cekilen_data_id == dbSatir).Where(x => x.cekilen_durum == 1).Select(x => x.cekilen_url).FirstOrDefault();
+                model.hataliUrun_adi = db.cekilen_datalar.Where(x => x.cekilen_data_id == dbSatir).Where(x => x.cekilen_durum == 1).Select(x => x.cekilen_isim).FirstOrDefault();
 
                 db.hataliUrunler.Add(model);
                 db.SaveChanges();
             }
-            
-            return View("urunDetay", viewModel);
+
+            return RedirectToAction("urunDetay", new { id = id });
         }
 
     }

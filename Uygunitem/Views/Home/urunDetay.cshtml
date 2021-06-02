@@ -109,10 +109,10 @@
                                         <a href="@item.cekilen_url" target="_blank" class="fas fa-shopping-cart fa-lg">     SATICIYA GİT </a>
                                     </td>
                                     <td style="text-align:center;vertical-align:middle;background-color:#FFB233;position:relative">
-                                        @using (Html.BeginForm("hataliUrun", "Home", new { urunAdi = item.cekilen_isim, dbSatir = item.cekilen_data_id, firma = item.cekilen_firma, link = item.cekilen_url, id = Model.id, anahtarkelimeler = Model.urunler.Where(x => x.urun_id == Model.id).Select(x => x.anahtar_kelimeler).FirstOrDefault() }, FormMethod.Post))
+                                        @using (Html.BeginForm("hataliUrun", "Home", new { dbSatir = item.cekilen_data_id,id = Model.id}, FormMethod.Post))
                                         {
 
-                                            <button type="submit"><a href="#ad" class="fa fa-exclamation-circle fa-3x" style="color:#AF4A35;"></a></button>
+                                            <button type="submit" class="fa fa-exclamation-circle fa-3x" style="color:#AF4A35;"></button>
 
 
                                         }
@@ -139,7 +139,7 @@
                                         <a href="@item.cekilen_url" target="_blank" class="fas fa-shopping-cart fa-lg">     SATICIYA GİT </a>
                                     </td>
                                     <td style="text-align:center;vertical-align:middle">
-                                        @using (Html.BeginForm("hataliUrun", "Home", new { urunAdi = item.cekilen_isim, dbSatir = item.cekilen_data_id, firma = item.cekilen_firma, link = item.cekilen_url, id = Model.id, anahtarkelimeler = Model.urunler.Where(x => x.urun_id == Model.id).Select(x => x.anahtar_kelimeler).FirstOrDefault() }, FormMethod.Post))
+                                        @using (Html.BeginForm("hataliUrun", "Home", new { dbSatir = item.cekilen_data_id, id = Model.id}, FormMethod.Post))
                                         {
                                             <button type="submit" class ="fa fa-exclamation-circle fa-3x" style="color:#AF4A35;"></button>
                                         }
@@ -244,10 +244,8 @@
                     <div class="column1" id="main1">
                         <h1>Ürün Takİp Formu </h1><br /> <br />
 
-                        @using (Html.BeginForm("urunTakip", "Home", new { fiyat = Model.cekilen_datalar.Where(x => Model.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).Where(x => x.cekilen_durum == 1).OrderBy(x => x.cekilen_fiyat).Select(x => x.cekilen_fiyat).First(), id = Model.id, anahtarkelimeler = Model.urunler.Where(x => x.urun_id == Model.id).Select(x => x.anahtar_kelimeler).FirstOrDefault() }, FormMethod.Post))
+                        @using (Html.BeginForm("urunTakip", "Home", new { id = Model.id}, FormMethod.Post))
                         {
-                            mailGonder mail = new mailGonder();
-
                             <form class="contact100-form" method="post">
                                 <div class="wrap-input100 validate-input" data-validate="Name is required">
                                     <input class="input100" type="text" name="takip_ad" placeholder="İsim" oninvalid="this.setCustomValidity('İsminiz boş olamaz!')" oninput="setCustomValidity('')" required>
@@ -283,53 +281,6 @@
         </div>
     </div>
 
-    @*-----------------Hatalı ürün Modal Popup------------*@
-
-    <div class="modal fade" id="hataliUrun" tabindex="-1" role="dialog" aria-labelledby="hataliUrun" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content1">
-                <div class="modal-body1">
-                    <div class="column1" id="main1">
-                        <h1>Ürün Takİp Formu </h1><br /> <br />
-
-                        @using (Html.BeginForm("urunTakip", "Home", new { fiyat = Model.cekilen_datalar.Where(x => Model.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).Where(x => x.cekilen_durum == 1).OrderBy(x => x.cekilen_fiyat).Select(x => x.cekilen_fiyat).First(), id = Model.id, anahtarkelimeler = Model.urunler.Where(x => x.urun_id == Model.id).Select(x => x.anahtar_kelimeler).FirstOrDefault() }, FormMethod.Post))
-                        {
-                            mailGonder mail = new mailGonder();
-
-                            <form class="contact100-form" method="post">
-                                <div class="wrap-input100 validate-input" data-validate="Name is required">
-                                    <input class="input100" type="text" name="takip_ad" placeholder="İsim" oninvalid="this.setCustomValidity('İsminiz boş olamaz!')" oninput="setCustomValidity('')" required>
-                                    <span class="focus-input100"></span>
-                                    <span class="symbol-input100">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                    </span>
-                                </div><br />
-                                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                                    <input class="input100" type="email" name="takip_email" placeholder="E-mail" required>
-                                    <span class="focus-input100"></span>
-                                    <span class="symbol-input100">
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <br /><br />
-                                <div class="abtn_wrap">
-                                    <button type="submit" class="abtn_wrap" style="color:white;" href="#">   Ürünü Takibe Al</button>
-                                </div>
-                            </form>
-                        }
-                    </div>
-
-                    <div class="column1" id="secondary">
-                        <div class="sec-content" style="text-align:center; margin-top:150px;">
-                            <h2>Hoşgeldiniz!</h2>
-                            <h3>Ürün Hakkında İndirimlerden haberdar olmak için lütfen bilgilerinizi doldurunuz.</h3>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     @*-----------------Hatalı Urun Tesekkur Popup------------*@
 
     <div id="ad" class="modal1"  tabindex="-1" align="center" style="position:fixed">

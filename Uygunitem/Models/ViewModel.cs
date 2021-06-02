@@ -26,6 +26,7 @@ namespace Uygunitem.Models
         public int id { get; set; }
 
         public IEnumerable firmalar { get; set; }
+        public urunler urunGetir { get; set; }
 
 
     }

@@ -199,6 +199,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\urunEkleme.cshtml" />
     <Content Include="Views\Admin\urunDuzenleme.cshtml" />
+    <Content Include="Views\Admin\urunGetir.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

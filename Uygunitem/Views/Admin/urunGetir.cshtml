@@ -1,0 +1,37 @@
+﻿@model Uygunitem.Models.ViewModel
+
+@{
+    ViewBag.Title = "urunGetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="testbox">
+     <fieldset>
+        @using (Html.BeginForm("urunGuncelle", "Admin", FormMethod.Post, new { @class = "urunEkle" }))
+        {
+            
+            <legend>ÜRÜN DÜZENLEME FORMU </legend>
+            <div class="item">
+                @Html.HiddenFor(m => m.urunGetir.urun_id)
+                <label for="name">ÜRÜN ADI<span>*</span></label>                
+                @Html.TextBoxFor(m => m.urunGetir.urun_isim)
+            </div>
+            <div class="item">
+                <label for="name">ÜRÜN ANAHTAR KELİMELERİ<span>*</span></label>
+                @Html.TextBoxFor(m => m.urunGetir.anahtar_kelimeler)
+            </div>
+            <div class="item">
+                <label for="address">AÇIKLAMA<span>*</span></label><br />
+                @Html.TextAreaFor(m => m.urunGetir.urun_aciklama,5,226,0)
+                
+
+            </div>
+           
+            <div class="btn-block">
+                 <button type="submit">APPLY</button>
+            </div>                                
+         }
+
+          </fieldset>
+                                               
+</div>
