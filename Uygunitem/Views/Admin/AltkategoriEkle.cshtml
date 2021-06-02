@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "AltkategoriEkle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<h2 style="color:white; text-align:center;">ALT KATEGORİ EKLE</h2>
+
+<br />
+<div class="item" style="width: 50%; margin-left:1%;">
+    <label for="name" style="color:white;">ALT KATEGORİ ADI GİRİNİZ<span>*</span></label><br /><br />
+    <input id="name" type="text" name="AltKateEkle" placeholder="Alt Kategori Adı Giriniz" required />
+</div>
+
+
+<br />
+<div style="        background-color: white;   width: 50%;   margin-left: 1%;">
+    <select name="select1" id="select1" required>
+        <option selected value="" disabled>Alt Kategoriler</option>
+      
+    </select>
+</div>
+
+<br />
+<div class="btn-block">
+    <button type="submit">GÖNDER</button>
+</div>
+<br />

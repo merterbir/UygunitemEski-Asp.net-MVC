@@ -141,6 +141,16 @@ namespace Uygunitem.Controllers
             viewModel.urunGetir = urun;
             return View("urunGetir", viewModel);
         }
+        public ActionResult kategoriEkle()
+        {
+            
+            return View("kategoriEkle");
+        }
+        public ActionResult AltkategoriEkle()
+        {
+
+            return View("AltkategoriEkle");
+        }
         [HttpPost]
         public ActionResult urunGuncelle(ViewModel p1)
         {
