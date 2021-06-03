@@ -143,14 +143,79 @@ namespace Uygunitem.Controllers
         }
         public ActionResult kategoriEkle()
         {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.urunler = db.urunler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.hatamesaj = "";
+            return View("kategoriEkle",viewModel);
             
-            return View("kategoriEkle");
+        }
+        [HttpPost]
+        public ActionResult kategoriEkleform(FormCollection form)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.urunler = db.urunler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            string katesorgu = form["KateEkle"].Trim();
+            if (db.kategoriler.Where(x => x.kate_isim.Contains(katesorgu)).Count() == 1)
+            {
+                viewModel.hatamesaj = "Kategori Ekleme Başarısız! Aynı isimde kategori zaten mevcut!";
+               
+            }
+            else
+            {
+                kategoriler kategori = new kategoriler();
+                kategori.kate_isim = form["KateEkle"].Trim();
+                db.kategoriler.Add(kategori);
+                db.SaveChanges();
+                viewModel.hatamesaj = "Kategori Ekleme Başarılı!";
+
+            }
+            
+           
+            return View("kategoriEkle",viewModel);
         }
         public ActionResult AltkategoriEkle()
         {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.urunler = db.urunler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.hatamesaj = "";
 
-            return View("AltkategoriEkle");
+            return View("AltkategoriEkle",viewModel);
         }
+        [HttpPost]
+        public ActionResult altkategoriEkleform(FormCollection form)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.urunler = db.urunler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            string katesorgu = form["KateEkle"].Trim();
+            int üstkatesorgu = Convert.ToInt32(form["select1"].Trim());
+            if (db.alt_kategoriler.Where(x => x.altkate_isim.Contains(katesorgu)).Where(x => x.üstkate_id == üstkatesorgu).Count() == 1)
+            {
+                viewModel.hatamesaj = "Alt Kategori Ekleme Başarısız! Aynı isimde alt kategori zaten mevcut!";
+
+            }
+            else
+            {
+                alt_kategoriler kategori = new alt_kategoriler();
+                kategori.altkate_isim = form["KateEkle"].Trim();
+                kategori.üstkate_id = Convert.ToInt32(form["select1"].Trim());
+                db.alt_kategoriler.Add(kategori);
+                db.SaveChanges();
+                viewModel.hatamesaj = "Alt Kategori Ekleme Başarılı!";
+
+            }
+
+
+            return View("AltkategoriEkle", viewModel);
+        }
+
         [HttpPost]
         public ActionResult urunGuncelle(ViewModel p1)
         {

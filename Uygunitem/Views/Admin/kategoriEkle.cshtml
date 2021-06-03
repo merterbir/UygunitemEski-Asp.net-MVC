@@ -1,17 +1,31 @@
-﻿
+﻿@model Uygunitem.Models.ViewModel
 @{
     ViewBag.Title = "kategoriEkle";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<br />
-<h2 style="color:white; text-align:center;">KATEGORİ EKLE</h2>
-<br />
-<div class="item" style=" margin-left: 1%; width:50%;">
-    <label for="name" style="color:white;">KATEGORİ ADI GİRİNİZ<span>*</span></label><br /><br />
-    <input id="name" type="text" name="KateEkle" placeholder="Kategori Adı Giriniz" required />
-</div>
+<fieldset>
+    @using (Html.BeginForm("kategoriEkleform", "Admin", FormMethod.Post, new { @class = "urunEkle" }))
+    {
+        <br />
+        <legend>KATEGORİ EKLE</legend>
+        <br />
+        <div class="item">
+            <label for="name" style="color:black;">KATEGORİ ADI GİRİNİZ<span>*</span></label><br /><br />
+            <input id="name" type="text" name="KateEkle" placeholder="Kategori Adı Giriniz" required />
+        </div>
+        
+        if (Model.hatamesaj == "Kategori Ekleme Başarılı!")
+        {
+            <h3 style="color:greenyellow">@Model.hatamesaj</h3>
+        }
+        else
+        {
+            <h3 style="color:red">@Model.hatamesaj</h3>
+        }
 
+        <div class="btn-block">
+            <button type="submit">GÖNDER</button>
+        </div><br />
+    }
 
-<div class="btn-block">
-    <button type="submit">GÖNDER</button>
-</div><br />
+</fieldset>
