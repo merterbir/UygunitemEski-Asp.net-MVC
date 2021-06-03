@@ -1,0 +1,42 @@
+﻿@model Uygunitem.Models.ViewModel
+@{
+    ViewBag.Title = "kategoriEkle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<fieldset>
+    @using (Html.BeginForm("altkategoriGuncelle", "Admin", FormMethod.Post, new { @class = "urunEkle" }))
+    {
+        <br />
+        <legend>ALT KATEGORİ EKLE</legend>
+        <br />
+        <div class="item">
+            <label for="name" style="color:black;">ALT KATEGORİ ADI GİRİNİZ<span>*</span></label><br /><br />
+            @Html.HiddenFor(m => m.altkategoriGetir.altkate_id)
+            @Html.HiddenFor(m => m.altkategoriGetir.üstkate_id)
+            @Html.TextBoxFor(m => m.altkategoriGetir.altkate_isim)
+        </div>
+        <div class="item">
+            <select name="üstkate" id="üstkate" required>
+                <option selected value= "@Model.üstkint">@Model.üstkstring</option>
+                @foreach (var item in Model.kategoriler)
+                {
+                    <option value="@item.kate_id">@item.kate_isim</option>
+                }
+
+            </select>
+        </div>
+        if (Model.hatamesaj == "Alt Kategori Düzenleme Başarılı!")
+        {
+            <h3 style="color:greenyellow">@Model.hatamesaj</h3>
+        }
+        else
+        {
+            <h3 style="color:red">@Model.hatamesaj</h3>
+        }
+
+        <div class="btn-block">
+            <button type="submit">GÖNDER</button>
+        </div><br />
+    }
+
+</fieldset>

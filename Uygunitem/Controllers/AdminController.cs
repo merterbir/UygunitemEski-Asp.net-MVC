@@ -94,9 +94,6 @@ namespace Uygunitem.Controllers
                 {
                         ViewBag.Message = "ERROR: Dosya bulunamadı";//
                 }
-
-                    
-                
                 model.urun_foto_path = "themes/images/products/" + file.FileName;
                 model.üstkate_id = Convert.ToInt32(form["select1"].Trim());
                 model.altkate_id = 1;
@@ -108,7 +105,6 @@ namespace Uygunitem.Controllers
                 //    ViewBag.Message = "You have not specified a file.";
                 //}
                 ViewBag.Message = "Ürün Ekleme Başarılı!";
-
                 }
                 else
                 {
@@ -228,6 +224,96 @@ namespace Uygunitem.Controllers
             //urun.altkate_id = p1.urunGetir.altkate_id;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult kategoriDuzenleme()
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            return View("kategoriDuzenleme",viewModel);
+        }
+        public ActionResult kategoriGetir(int id)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.hatamesaj = "";
+            var kategori = db.kategoriler.Find(id);
+            viewModel.kategoriGetir = kategori;
+            return View("kategoriGetir", viewModel);
+        }
+        [HttpPost]
+        public ActionResult kategoriGuncelle(ViewModel p1)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            var kategori = db.kategoriler.Find(p1.kategoriGetir.kate_id);
+
+            
+
+            string katesorgu = p1.kategoriGetir.kate_isim;
+            if (db.kategoriler.Where(x => x.kate_isim.Contains(katesorgu)).Count() == 1)
+            {
+                viewModel.hatamesaj = "Kategori Güncelleme Başarısız! Aynı isimde kategori zaten mevcut!";
+
+            }
+            else
+            {
+                kategori.kate_isim = p1.kategoriGetir.kate_isim;
+                db.SaveChanges();
+                viewModel.hatamesaj = "Kategori Güncelleme Başarılı!";
+
+            }
+           
+            return View("kategoriGetir",viewModel);
+        }
+        public ActionResult altkategoriDuzenleme()
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            return View("altkategoriDuzenleme", viewModel);
+        }
+        public ActionResult altkategoriGetir(int id)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.hatamesaj = "";
+            var altkategori = db.alt_kategoriler.Find(id);
+            viewModel.altkategoriGetir = altkategori;
+            viewModel.üstkstring = db.kategoriler.Where(x => x.kate_id == altkategori.üstkate_id).Select(x => x.kate_isim).FirstOrDefault();
+            viewModel.üstkint = db.kategoriler.Where(x => x.kate_id == altkategori.üstkate_id).Select(x => x.kate_id).FirstOrDefault();
+            return View("altkategoriGetir", viewModel);
+        }
+        [HttpPost]
+        public ActionResult altkategoriGuncelle(ViewModel p1,FormCollection form)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            var kategori = db.alt_kategoriler.Find(p1.altkategoriGetir.altkate_id);
+            int üstkatesorgu =Convert.ToInt32( form["üstkate"].Trim());
+
+
+
+            string katesorgu = p1.altkategoriGetir.altkate_isim;
+            if (db.alt_kategoriler.Where(x => x.altkate_isim.Contains(katesorgu)).Where(x => x.üstkate_id == üstkatesorgu).Count() == 1)
+            {
+                viewModel.hatamesaj = "Alt Kategori Düzenleme Başarısız! Aynı isimde alt kategori zaten mevcut!";
+                viewModel.üstkint = üstkatesorgu;
+                viewModel.üstkstring = db.kategoriler.Where(x => x.kate_id == üstkatesorgu).Select(x => x.kate_isim).FirstOrDefault();
+
+            }
+            else
+            {
+                kategori.altkate_isim = p1.altkategoriGetir.altkate_isim;
+                kategori.üstkate_id = üstkatesorgu;
+                db.SaveChanges();
+                viewModel.hatamesaj = "Alt Kategori Düzenleme Başarılı!";
+                viewModel.üstkint = üstkatesorgu;
+                viewModel.üstkstring = db.kategoriler.Where(x => x.kate_id == üstkatesorgu).Select(x => x.kate_isim).FirstOrDefault();
+
+            }
+
+            return View("altkategoriGetir",viewModel);
         }
     }
 }

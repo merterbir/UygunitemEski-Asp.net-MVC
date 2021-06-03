@@ -1,0 +1,80 @@
+﻿@model Uygunitem.Models.ViewModel
+@{
+    ViewBag.Title = "urunDuzenleme";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<h3 style="color:white; margin:20px;">KATEGORİ DÜZENLEME FORMU</h3>
+
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="urunEkle" style="text-align:center;">
+    <div class="flex-lg-nowrap">
+        <div class="col">
+
+
+            <div class="flex-lg-nowrap" style="text-align:center;">
+                <div class="col mb-3">
+                    <div class="e-panel card">
+                        <div class="card-body">
+
+                            <div class="e-table">
+                                <div class="table-responsive table-lg mt-3">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="max-width">Alt Kategori Numarası</th>
+                                                <th class="sortable">Alt Kategori Adı</th>
+                                                <th class="sortable">Üst Kategori Numarası</th>
+                                                <th class="sortable">Düzenle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.alt_kategoriler)
+                                            {
+                                            <tr>
+
+
+                                                <td class="text-nowrap align-middle">@item.altkate_id</td>
+                                                <td class="text-nowrap align-middle"><span>@item.altkate_isim</span></td>
+                                                <td class="text-nowrap align-middle"><span>@item.üstkate_id</span></td>
+                                                <td class="text-center align-middle">
+                                                    <div class="btn-group align-top">
+                                                        <a class="btn-sm btn-outline-secondary badge" href="/Admin/altkategoriGetir/@item.altkate_id" target="_blank">Edit</a>
+
+                                                        <button class="btn-outline-secondary badge" type="button"><i class="fa fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            }
+
+
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <ul class="pagination mt-3 mb-0">
+                                            <li class="disabled page-item"><a href="#" class="page-link">‹</a></li>
+                                            <li class="active page-item"><a href="#" class="page-link">1</a></li>
+                                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                            <li class="page-item"><a href="#" class="page-link">3</a></li>
+                                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                                            <li class="page-item"><a href="#" class="page-link">5</a></li>
+                                            <li class="page-item"><a href="#" class="page-link">›</a></li>
+                                            <li class="page-item"><a href="#" class="page-link">»</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+               
+                    </div>
+                </div>
+            </div>
+        </div>
+ 

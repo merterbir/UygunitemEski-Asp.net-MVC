@@ -27,7 +27,12 @@ namespace Uygunitem.Models
 
         public IEnumerable firmalar { get; set; }
         public urunler urunGetir { get; set; }
+        public kategoriler kategoriGetir { get; set; }
+
+        public alt_kategoriler altkategoriGetir { get; set; }
         public string hatamesaj { get; set; }
+        public string üstkstring { get; set; }
+        public int üstkint { get; set; }
 
 
     }
