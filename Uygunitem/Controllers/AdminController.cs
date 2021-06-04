@@ -250,7 +250,7 @@ namespace Uygunitem.Controllers
             
 
             string katesorgu = p1.kategoriGetir.kate_isim;
-            if (db.kategoriler.Where(x => x.kate_isim.Contains(katesorgu)).Count() == 1)
+            if (db.kategoriler.Where(x => x.kate_isim.Contains(katesorgu)&&x.kate_id !=kategori.kate_id).Count() == 1)
             {
                 viewModel.hatamesaj = "Kategori Güncelleme Başarısız! Aynı isimde kategori zaten mevcut!";
 

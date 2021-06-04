@@ -33,6 +33,11 @@ namespace Uygunitem.Models
         public string hatamesaj { get; set; }
         public string üstkstring { get; set; }
         public int üstkint { get; set; }
+        public string[] firmalargrafik { get; set; }
+        public string[] fiyatlargrafik { get; set; }
+        public Dictionary<string,string> tablo { get; set; }
+        public List<ViewModel> list { get; set; }
+
 
 
     }

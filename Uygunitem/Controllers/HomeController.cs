@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Web;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Uygunitem.Controllers
 {
@@ -105,12 +106,28 @@ namespace Uygunitem.Controllers
             viewModel.yorumlar = db.yorumlar.ToList();
             viewModel.hataliUrunler = db.hataliUrunler.ToList();
             viewModel.sponsorlar = db.sponsorlar.ToList();
+            viewModel.tablo = new Dictionary<string, string>();
+
             if (db.urunler.Where(x => x.urun_id == id).Count() != 0)
             {
                 viewModel.anahtarKelimeler = urunKontrol.parcala(db.urunler.Where(x => x.urun_id == id).Select(x => x.anahtar_kelimeler).FirstOrDefault());
+                var ürünler = db.cekilen_datalar.Where(x => viewModel.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).OrderBy(x => x.cekilen_fiyat);
+                
+                foreach (var item in ürünler)
+                {
+                    if(viewModel.tablo.ContainsKey(item.cekilen_firma))
+                    {
+                        string gfiyat = item.cekilen_fiyat.ToString();
+                        viewModel.tablo[item.cekilen_firma] += gfiyat.Replace(",",".")+",";
+                    }
+                    else
+                    {
+                        string gfiyat = item.cekilen_fiyat.ToString();
+                        viewModel.tablo.Add(item.cekilen_firma, gfiyat.Replace(",", ".") + ",");
+                    }
+                }
             }
             // viewModel.firmalar = db.cekilen_datalar.Where(x => viewModel.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).Where(x => x.cekilen_durum == 1).Select(x => x.cekilen_firma).ToList();
-
 
 
             return View("urunDetay", viewModel);
