@@ -1,0 +1,32 @@
+﻿@model Uygunitem.Models.ViewModel
+
+<!--carousel====================================================================== -->
+<!--carousel bitiş====================================================================== -->
+<h4>"@Model.ArananText" ait Bulunan Urunler </h4>
+@if (Model.arananUrunler.Count() > 0)
+{
+<ul class="thumbnails">
+
+
+    @foreach (var urun in Model.arananUrunler)
+    {
+<li class="span3">
+    <div class="thumbnail">
+        <a href="~/Home/urunDetay/@urun.urun_id"><img src="~/@urun.urun_foto_path" style="width:150px;height:150px" /></a>
+        <div class="caption">
+            <h5>@urun.urun_isim</h5>
+            <h4 style="text-align:center"><a class="btn" href="~/Home/urunDetay/@urun.urun_id">  <i class="icon-zoom-in"></i> İNCELE</a> </h4>
+        </div>
+    </div>
+</li>}
+
+
+
+
+
+</ul> }
+ else
+{
+    <h3 style="margin:100px;text-align:center;color:dimgrey"> "@Model.ArananText" </h3>
+    <h1 style="margin-bottom:350px;text-align:center;color:darkred"> Hiç Bir Ürün Bulunamadı... </h1>
+}

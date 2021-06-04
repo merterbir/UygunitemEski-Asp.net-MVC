@@ -206,6 +206,7 @@
     <Content Include="Views\Admin\kategoriGetir.cshtml" />
     <Content Include="Views\Admin\altkategoriDuzenleme.cshtml" />
     <Content Include="Views\Admin\altkategoriGetir.cshtml" />
+    <Content Include="Views\Home\arananUrun.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

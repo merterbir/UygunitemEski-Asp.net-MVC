@@ -38,6 +38,9 @@ namespace Uygunitem.Models
         public Dictionary<string,string> tablo { get; set; }
         public List<ViewModel> list { get; set; }
 
+        public string ArananText { get; set; }
+        public IQueryable<urunler> arananUrunler { get; set; }
+
 
 
     }

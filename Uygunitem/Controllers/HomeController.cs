@@ -228,6 +228,33 @@ namespace Uygunitem.Controllers
 
             return RedirectToAction("urunDetay", new { id = id });
         }
+        public ActionResult arananUrun (ViewModel p1)
+        {
+
+            return RedirectToAction("arananUrun", p1);
+        }
+        [HttpPost]
+        public ActionResult aramaSonuclari(FormCollection form)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.urunler = db.urunler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.footer = db.footer.ToList();
+            string aramaText = form["searchtext"].Trim();
+            string[] aramaListe = aramaText.Split(' ');
+            viewModel.ArananText= form["searchtext"].Trim();
+            viewModel.arananUrunler = db.urunler.Where(x => aramaListe.All(a => x.urun_isim.Contains(a)));
+            if(aramaText == "")
+            {
+                return View("Index",viewModel);
+            }
+            else
+            {
+                return View("arananUrun", viewModel);
+            }
+            
+        }
 
     }
 }

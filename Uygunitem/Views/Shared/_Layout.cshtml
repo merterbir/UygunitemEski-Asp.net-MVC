@@ -88,22 +88,23 @@
                 </a>
                 <div class="navbar-inner">
                     <a class="brand" href="~/home/Index"><img src="~/themes/images/logo.png" /></a>
-                    <form class="form-inline navbar-search" method="post" action="~/products.html">
-                        <input id="srchFld" class="srchTxt" type="text" style="width:250px; height:40px;" /> &nbsp; &nbsp;
+                    @using (Html.BeginForm("aramaSonuclari", "Home", FormMethod.Post, new { @class = "form-inline navbar-search" }))
+                    {
+                    <input name="searchtext" class="srchTxt" type="text" style="width:250px; height:40px;" /> 
 
 
 
 
 
-                        <button type="submit" id="submitButton" class="btn btn-primary">ARA</button>
-                    </form>
-                    <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="~/home/Index">ANASAYFA</a></li>
-                        <li class=""><a href="~/home/ileti">ÖNERİ & TALEP </a></li>
-                        <li class=""><a href="~/home/hakkimizda">HAKKIMIZDA</a></li>
+                    <button type="submit" id="submitButton" class="btn btn-primary">ARA</button>
+                    }
+                                <ul id="topMenu" class="nav pull-right">
+                                    <li class=""><a href="~/home/Index">ANASAYFA</a></li>
+                                    <li class=""><a href="~/home/ileti">ÖNERİ & TALEP </a></li>
+                                    <li class=""><a href="~/home/hakkimizda">HAKKIMIZDA</a></li>
 
-                    </ul>
-                </div>
+                                </ul>
+                                            </div>
             </div>
         </div>
         @RenderSection("carouselBlk", false)
