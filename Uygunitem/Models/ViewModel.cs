@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Uygunitem.Models
 {
@@ -41,7 +42,8 @@ namespace Uygunitem.Models
 
         public string ArananText { get; set; }
         public IQueryable<urunler> arananUrunler { get; set; }
-
+        public IEnumerable<SelectListItem> üstKategoriler { get; set; }
+        public IEnumerable<SelectListItem> altKategoriler { get; set; }
 
 
     }

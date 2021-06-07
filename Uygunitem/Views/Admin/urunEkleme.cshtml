@@ -5,8 +5,8 @@
 }
 
 <div class="testbox">
-     <fieldset>
-        @using (Html.BeginForm("fotoYukleme", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" , @class = "urunEkle" }))
+    <fieldset>
+        @using (Html.BeginForm("fotoYukleme", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "urunEkle" }))
         {
 
             <legend>ÜRÜN EKLEME FORMU </legend>
@@ -26,27 +26,33 @@
             <div class="item">
                 <div class="name-item">
                     @*<div>
-                        <select name="select1" id="select1" required>
-                            <option selected value="" disabled>Üst Kategori</option>
-                            @foreach (var item in Model.kategoriler)
-                            {
-                                <option value="@item.kate_id">@item.kate_isim</option>
-                            }
+                            <select name="select1" id="select1" required>
+                                <option selected value="" disabled>Üst Kategori</option>
+                                @foreach (var item in Model.kategoriler)
+                                {
+                                    <option value="@item.kate_id">@item.kate_isim</option>
+                                }
 
-                        </select>
-                    </div>
-                    <div>
+                            </select>
+                        </div>
+                        <div>
 
-                       
-                        <select name="select2" id="select2" required>
-                            <option selected value="" disabled>Alt Kategori</option>
-                            @foreach (var item in Model.alt_kategoriler)
-                            {
-                                <option value="@item.altkate_id">@item.altkate_isim</option>
-                            }
-                        </select>
-                    </div>*@  
+
+                            <select name="select2" id="select2" required>
+                                <option selected value="" disabled>Alt Kategori</option>
+                                @foreach (var item in Model.alt_kategoriler)
+                                {
+                                    <option value="@item.altkate_id">@item.altkate_isim</option>
+                                }
+                            </select>
+                        </div>*@
+                    @Html.DropDownList("DrpUst", Model.üstKategoriler, "----- Kategori Seçiniz -----")
+
                 </div>
+
+            </div>
+            <div class="item">
+                @Html.DropDownList("DrpAlt", Model.altKategoriler, "----- Alt Kategori Seçiniz -----")
             </div>
             <label for="file">Ürün Fotoğrafı Yükleyiniz:</label>
             <input type="file" name="file" id="file" required /><br><br>
@@ -59,10 +65,31 @@
                 <h3 style="color:red">@ViewBag.Message</h3>
             }
             <div class="btn-block">
-                 <button type="submit" value="Upload Image">APPLY</button>
-            </div>                                
+                <button type="submit" value="Upload Image">APPLY</button>
+            </div>
         }
 
-          </fieldset>
-                                               
+    </fieldset>
+
 </div>
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        $('#DrpUst').change(function () {
+            var id = $('#DrpUst').val();
+            $.ajax({
+                url: '/Admin/altKateGetir',
+                data: { p: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+                    console.log(data);
+                    $('#DrpAlt').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $('#DrpAlt').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+                    }
+                }
+            });
+        });
+    });
+</script>

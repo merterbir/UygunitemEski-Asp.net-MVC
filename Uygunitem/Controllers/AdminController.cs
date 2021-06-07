@@ -26,6 +26,7 @@ namespace Uygunitem.Controllers
             viewModel.hataliUrunler = db.hataliUrunler.ToList();
             return View(viewModel);
         }
+        [HttpGet]
         public ActionResult urunEkleme()
         {
             ViewModel viewModel = new ViewModel();
@@ -38,6 +39,8 @@ namespace Uygunitem.Controllers
             viewModel.footer = db.footer.ToList();
             viewModel.yorumlar = db.yorumlar.ToList();
             viewModel.hataliUrunler = db.hataliUrunler.ToList();
+            viewModel.üstKategoriler = new SelectList(db.kategoriler, "kate_id", "kate_isim");
+            viewModel.altKategoriler = new SelectList(db.alt_kategoriler, "altkate_id", "altkate_isim");
             return View(viewModel);
         }
         public ActionResult urunDuzenleme()
@@ -57,7 +60,10 @@ namespace Uygunitem.Controllers
         [HttpPost]
         public ActionResult fotoYukleme(HttpPostedFileBase file,FormCollection form)
         {
+
             ViewModel viewModel = new ViewModel();
+            viewModel.üstKategoriler = new SelectList(db.kategoriler, "kate_id", "kate_isim");
+            viewModel.altKategoriler = new SelectList(db.alt_kategoriler, "altkate_id", "altkate_isim");
             viewModel.kategoriler = db.kategoriler.ToList();
             viewModel.urunler = db.urunler.ToList();
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
@@ -95,8 +101,8 @@ namespace Uygunitem.Controllers
                         ViewBag.Message = "ERROR: Dosya bulunamadı";//
                 }
                 model.urun_foto_path = "themes/images/products/" + file.FileName;
-                model.üstkate_id = Convert.ToInt32(form["select1"].Trim());
-                model.altkate_id = 1;
+                model.üstkate_id = Convert.ToInt32(form["DrpUst"].Trim());
+                model.altkate_id = Convert.ToInt32(form["DrpAlt"].Trim()); 
                
                 db.urunler.Add(model);
                 db.SaveChanges();
@@ -372,7 +378,18 @@ namespace Uygunitem.Controllers
             db.SaveChanges();
             return RedirectToAction("menukategoriDuzenleme");
         }
-
+        public JsonResult altKateGetir(int p)
+        {
+            var altKategoriler = (from x in db.alt_kategoriler
+                                  join y in db.kategoriler on x.üstkate_id equals y.kate_id
+                                  where x.kategoriler.kate_id == p
+                                  select new
+                                  {
+                                      Text = x.altkate_isim,
+                                      Value = x.altkate_id.ToString()
+                                  }).ToList();
+            return Json(altKategoriler, JsonRequestBehavior.AllowGet);
+        }
 
 
     }
