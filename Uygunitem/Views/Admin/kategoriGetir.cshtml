@@ -3,30 +3,32 @@
     ViewBag.Title = "kategoriEkle";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<fieldset>
-    @using (Html.BeginForm("kategoriGuncelle", "Admin", FormMethod.Post, new { @class = "urunEkle" }))
-    {
-        <br />
-        <legend>KATEGORİ EKLE</legend>
-        <br />
-        <div class="item">
-            <label for="name" style="color:black;">KATEGORİ ADI GİRİNİZ<span>*</span></label><br /><br />
-            @Html.HiddenFor(m => m.kategoriGetir.kate_id)
-            @Html.TextBoxFor(m => m.kategoriGetir.kate_isim)
-        </div>
-        
-        if (Model.hatamesaj == "Kategori Güncelleme Başarılı!")
+<div class="testbox">
+    <fieldset>
+        @using (Html.BeginForm("kategoriGuncelle", "Admin", FormMethod.Post, new { @class = "urunEkle" }))
         {
-            <h3 style="color:greenyellow">@Model.hatamesaj</h3>
-        }
-        else
-        {
-            <h3 style="color:red">@Model.hatamesaj</h3>
+            <br />
+            <legend>KATEGORİ EKLE</legend>
+            <br />
+            <div class="item">
+                <label for="name" style="color:black;">KATEGORİ ADI GİRİNİZ<span>*</span></label><br /><br />
+                @Html.HiddenFor(m => m.kategoriGetir.kate_id)
+                @Html.TextBoxFor(m => m.kategoriGetir.kate_isim)
+            </div>
+
+            if (Model.hatamesaj == "Kategori Güncelleme Başarılı!")
+            {
+                <h3 style="color:greenyellow">@Model.hatamesaj</h3>
+            }
+            else
+            {
+                <h3 style="color:red">@Model.hatamesaj</h3>
+            }
+
+            <div class="btn-block">
+                <button type="submit">GÖNDER</button>
+            </div><br />
         }
 
-        <div class="btn-block">
-            <button type="submit">GÖNDER</button>
-        </div><br />
-    }
-
-</fieldset>
+    </fieldset>
+</div>

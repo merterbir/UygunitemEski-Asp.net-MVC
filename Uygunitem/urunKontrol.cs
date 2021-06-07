@@ -23,5 +23,10 @@ namespace Uygunitem
 
             return false;
         }
+        public static string[] parcalaUrun(string anahtar)
+        {
+            string[] yeni = anahtar.Split(' ');
+            return yeni;
+        }
     }
 }

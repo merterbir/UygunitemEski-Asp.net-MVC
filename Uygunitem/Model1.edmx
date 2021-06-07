@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="uygunitemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="uygunitemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="alt_kategoriler">
           <Key>
             <PropertyRef Name="altkate_id" />
@@ -65,6 +65,14 @@
           </Key>
           <Property Name="kate_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="kate_isim" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="menuKategoriler">
+          <Key>
+            <PropertyRef Name="idAnaKate" />
+          </Key>
+          <Property Name="idAnaKate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnasayfaKateId" Type="int" Nullable="false" />
+          <Property Name="AnasayfaKateIsım" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="mesaj">
           <Key>
@@ -130,6 +138,8 @@
           <Property Name="tarih" Type="datetime" Nullable="false" />
           <Property Name="mail" Type="text" Nullable="false" />
           <Property Name="isim" Type="text" Nullable="false" />
+          <Property Name="urun_isim" Type="text" Nullable="false" />
+          <Property Name="yorumDurum" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_alt_kategoriler_kategoriler">
           <End Role="kategoriler" Type="Self.kategoriler" Multiplicity="1" />
@@ -175,6 +185,7 @@
           <EntitySet Name="hakkimizda" EntityType="Self.hakkimizda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hataliUrunler" EntityType="Self.hataliUrunler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="kategoriler" EntityType="Self.kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menuKategoriler" EntityType="Self.menuKategoriler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mesaj" EntityType="Self.mesaj" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sponsorlar" EntityType="Self.sponsorlar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -194,7 +205,8 @@
             <End Role="urunler" EntitySet="urunler" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="uygunitemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -263,6 +275,14 @@
           <NavigationProperty Name="alt_kategoriler" Relationship="Self.FK_alt_kategoriler_kategoriler" FromRole="kategoriler" ToRole="alt_kategoriler" />
           <NavigationProperty Name="urunler" Relationship="Self.FK_urunler_kategoriler" FromRole="kategoriler" ToRole="urunler" />
         </EntityType>
+        <EntityType Name="menuKategoriler">
+          <Key>
+            <PropertyRef Name="idAnaKate" />
+          </Key>
+          <Property Name="idAnaKate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnasayfaKateId" Type="Int32" Nullable="false" />
+          <Property Name="AnasayfaKateIsım" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityType Name="mesaj">
           <Key>
             <PropertyRef Name="mesaj_id" />
@@ -329,6 +349,8 @@
           <Property Name="tarih" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="urun_isim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="yorumDurum" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_alt_kategoriler_kategoriler">
           <End Role="kategoriler" Type="Self.kategoriler" Multiplicity="1" />
@@ -374,6 +396,7 @@
           <EntitySet Name="hakkimizda" EntityType="Self.hakkimizda" />
           <EntitySet Name="hataliUrunler" EntityType="Self.hataliUrunler" />
           <EntitySet Name="kategoriler" EntityType="Self.kategoriler" />
+          <EntitySet Name="menuKategoriler" EntityType="Self.menuKategoriler" />
           <EntitySet Name="mesaj" EntityType="Self.mesaj" />
           <EntitySet Name="sponsorlar" EntityType="Self.sponsorlar" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -467,6 +490,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="menuKategoriler">
+            <EntityTypeMapping TypeName="uygunitemModel.menuKategoriler">
+              <MappingFragment StoreEntitySet="menuKategoriler">
+                <ScalarProperty Name="idAnaKate" ColumnName="idAnaKate" />
+                <ScalarProperty Name="AnasayfaKateId" ColumnName="AnasayfaKateId" />
+                <ScalarProperty Name="AnasayfaKateIsım" ColumnName="AnasayfaKateIsım" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="mesaj">
             <EntityTypeMapping TypeName="uygunitemModel.mesaj">
               <MappingFragment StoreEntitySet="mesaj">
@@ -535,6 +567,8 @@
                 <ScalarProperty Name="tarih" ColumnName="tarih" />
                 <ScalarProperty Name="mail" ColumnName="mail" />
                 <ScalarProperty Name="isim" ColumnName="isim" />
+                <ScalarProperty Name="urun_isim" ColumnName="urun_isim" />
+                <ScalarProperty Name="yorumDurum" ColumnName="yorumDurum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

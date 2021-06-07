@@ -315,5 +315,65 @@ namespace Uygunitem.Controllers
 
             return View("altkategoriGetir",viewModel);
         }
+        public ActionResult menuKategoriEkle()
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.urunler = db.urunler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.hatamesaj = "";
+            return View("menukategoriEkle", viewModel);
+
+        }
+        [HttpPost]
+        public ActionResult menukategoriEkleform(FormCollection form)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.urunler = db.urunler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            int katesorgu =Convert.ToInt32( form["select1"].Trim());
+            if (db.menuKategoriler.Where(x => x.AnasayfaKateId == katesorgu).Count() > 0)
+            {
+                viewModel.hatamesaj = "Kategori Ekleme Başarısız! Aynı isimde kategori zaten mevcut!";
+
+            }
+            else
+            {
+                menuKategoriler kategori = new menuKategoriler();
+                kategori.AnasayfaKateId = Convert.ToInt32(form["select1"].Trim());
+                int kateId = Convert.ToInt32(form["select1"].Trim());
+                kategori.AnasayfaKateIsım = db.kategoriler.Where(x => x.kate_id ==kateId ).Select(x => x.kate_isim).SingleOrDefault();
+                db.menuKategoriler.Add(kategori);
+                db.SaveChanges();
+                viewModel.hatamesaj = "Menuye Kategori Ekleme Başarılı!";
+
+            }
+
+
+            return RedirectToAction("menuKategoriEkle");
+        }
+        public ActionResult menukategoriDuzenleme()
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
+            return View("menukategoriDuzenleme", viewModel);
+        }
+        public ActionResult menuKategoriSil(int id)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
+            var silinecek = db.menuKategoriler.Where(x => x.AnasayfaKateId == id).Single();
+            db.menuKategoriler.Remove(silinecek);
+            db.SaveChanges();
+            return RedirectToAction("menukategoriDuzenleme");
+        }
+
+
+
     }
 }

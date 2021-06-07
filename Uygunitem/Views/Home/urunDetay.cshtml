@@ -91,7 +91,7 @@
                         </thead>
                         <tbody>
                              
-                            @foreach (var item in Model.cekilen_datalar.Where(x => Model.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).Where(x => x.cekilen_durum == 1).Where(x => Model.sponsorlar.Any(a => a.sponsor_firmalink.Contains(x.cekilen_url))).OrderBy(x => x.cekilen_fiyat))
+                            @foreach (var item in Model.cekilen_datalar.Where(x => Model.anahtarKelimeler.All(a => urunKontrol.parcalaUrun(x.cekilen_isim).Any(c => c.Equals(a)))).Where(x => x.cekilen_durum == 1).Where(x => Model.sponsorlar.Any(a => a.sponsor_firmalink.Contains(x.cekilen_url))).OrderBy(x => x.cekilen_fiyat))
                             {
                                 <tr>
                                     <td style="text-align:center; vertical-align:middle; background-color:#FFB233">
@@ -121,7 +121,7 @@
                                 </tr>
                                 }
                             
-                            @foreach (var item in Model.cekilen_datalar.Where(x => Model.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).Where(x => x.cekilen_durum == 1).Where(x => !Model.sponsorlar.Any(a => a.sponsor_firmalink.Contains(x.cekilen_url))).OrderBy(x => x.cekilen_fiyat))
+                            @foreach (var item in Model.cekilen_datalar.Where(x => Model.anahtarKelimeler.All(a => urunKontrol.parcalaUrun(x.cekilen_isim).Any(c => c.Equals(a)))).Where(x => x.cekilen_durum == 1).Where(x => !Model.sponsorlar.Any(a => a.sponsor_firmalink.Contains(x.cekilen_url))).OrderBy(x => x.cekilen_fiyat))
                             {
                                 <tr>
                                     <td style="text-align:center; vertical-align:middle">
@@ -163,10 +163,10 @@
     </figure>
 
     @*-----------------Ürün Yorumlar-----------------*@
-    <h1 class="comments-title">Yorumlar (@Model.yorumlar.Where(x => x.urun_id == Model.id).Count())</h1>
-    if (@Model.yorumlar.Where(x => x.urun_id == Model.id).Count() > 0)
+    <h1 class="comments-title">Yorumlar (@Model.yorumlar.Where(x => x.urun_id == Model.id).Where(x => x.yorumDurum == 1).Count())</h1>
+    if (@Model.yorumlar.Where(x => x.urun_id == Model.id).Where(x => x.yorumDurum == 1).Count() > 0)
     {
-        foreach (var item in Model.yorumlar.Where(x => x.urun_id == Model.id))
+        foreach (var item in Model.yorumlar.Where(x => x.urun_id == Model.id).Where(x => x.yorumDurum == 1))
         {
             <div class="be-comment">
                 <div class="be-img-comment">
@@ -199,37 +199,37 @@
     }
     <hr class="soft clr" />
     @*-----------------Ürün Yorum İnputu-----------------*@
-    <form class="form-block " method="post">
-        <table>
-            <tr>
-                <td>
-                    <div class="form-group wrap-input100 validate-input" data-validate="İsim Giriniz" style="margin-top:15px; width:15%; ">
-                        <input class="input100" type="text" name="yorum_ad" placeholder="İsim" style="width:600%; background-color:#F6F6F7; color:black;" required>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                </td>
-                <td a>
-                    <div class="form-group wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz" style="margin-top:15px; width:15%;">
-                        <input class="input100" type="email" name="yorum_email" placeholder="Email" style="width:600%; background-color:#F6F6F7; color:black;" required>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <br />
-        <textarea class="be-comment-text" name="yorum_yorum" rows="10" placeholder="YORUMUNUZ" style="width:100%; resize:none; color:black;" required></textarea>
-        <div class="container-contact100-form-btn">
-            <button class="contact100-form-btn">
-                GÖNDER
-            </button>
-        </div>
-    </form>
+<form class="form-block " method="post"> 
+    <table>
+        <tr>
+            <td>
+                <div class="form-group wrap-input100 validate-input" data-validate="İsim Giriniz" style="margin-top:15px; width:15%; ">
+                    <input class="input100" type="text" name="yorum_ad" placeholder="İsim" style="width:600%; background-color:#F6F6F7; color:black;" required>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </td>
+            <td a>
+                <div class="form-group wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz" style="margin-top:15px; width:15%;">
+                    <input class="input100" type="email" name="yorum_email" placeholder="Email" style="width:600%; background-color:#F6F6F7; color:black;" required>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <textarea class="be-comment-text" name="yorum_yorum" rows="10" placeholder="YORUMUNUZ" style="width:100%; resize:none; color:black;" required></textarea>
+    <div class="container-contact100-form-btn">
+        <button id="yorumButon" class="contact100-form-btn">
+            GÖNDER
+        </button>
+    </div>
+</form>
 
 
 
@@ -294,12 +294,6 @@
             <a href="#" class="modal__close1 fa-9x" style="color:white">&times;</a>
         </div>
     </div>
-
-
-
-
-
-
 
 }
 else
@@ -384,8 +378,3 @@ else
         }]
     });
 </script>
-
-
-
-
-

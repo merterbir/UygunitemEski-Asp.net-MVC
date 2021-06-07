@@ -137,6 +137,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="mailGonder.cs" />
+    <Compile Include="menuKategoriler.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="mesaj.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -207,6 +210,9 @@
     <Content Include="Views\Admin\altkategoriDuzenleme.cshtml" />
     <Content Include="Views\Admin\altkategoriGetir.cshtml" />
     <Content Include="Views\Home\arananUrun.cshtml" />
+    <Content Include="Views\Admin\menuKategoriEkle.cshtml" />
+    <Content Include="Views\Admin\menukategoriDuzenleme.cshtml" />
+    <Content Include="Views\Home\üstKategoriler.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

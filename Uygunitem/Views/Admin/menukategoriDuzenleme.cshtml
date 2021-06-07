@@ -5,7 +5,7 @@
 }
 
 
-    <h3 style="color:white; margin:25px;">KATEGORİ DÜZENLEME FORMU</h3>
+    <h3 style="color:white; margin:25px;">MENU KATEGORİ SİLME</h3>
 
     <div class="testbox">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -30,18 +30,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach (var item in Model.kategoriler)
+                                                    @foreach (var item in Model.menuKategoriler)
                                                     {
                                                         <tr>
 
 
-                                                            <td class="text-nowrap align-middle">@item.kate_id</td>
-                                                            <td class="text-nowrap align-middle"><span>@item.kate_isim</span></td>
+                                                            <td class="text-nowrap align-middle">@item.AnasayfaKateId</td>
+                                                            <td class="text-nowrap align-middle"><span>@item.AnasayfaKateIsım</span></td>
                                                             <td class="text-center align-middle">
                                                                 <div class="btn-group align-top">
-                                                                    <a class="btn-sm btn-outline-secondary badge" href="/Admin/kategoriGetir/@item.kate_id" target="_blank">Edit</a>
-
-                                                                    <button class="btn-outline-secondary badge" type="button"><i class="fa fa-trash"></i></button>
+                                                                    <button onclick="location.href='@Url.Action("menuKategoriSil","Admin",new { id = item.AnasayfaKateId })'"  class="btn-outline-secondary badge" type="button"><i class="fa fa-trash"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>

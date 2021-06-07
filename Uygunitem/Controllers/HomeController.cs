@@ -21,6 +21,7 @@ namespace Uygunitem.Controllers
             viewModel.urunler = db.urunler.ToList();
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
             viewModel.footer = db.footer.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
 
             return View(viewModel);
         }
@@ -36,21 +37,36 @@ namespace Uygunitem.Controllers
             viewModel.yorumlar = db.yorumlar.ToList();
             viewModel.hataliUrunler = db.hataliUrunler.ToList();
             viewModel.sponsorlar = db.sponsorlar.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
 
 
 
             return View(viewModel);
         }
-        public ActionResult kategoriler(int id = 0)
+        public ActionResult kategoriler(int id = 0, int üstid = 0)
         {
             ViewModel viewModel = new ViewModel();
             viewModel.kategoriler = db.kategoriler.ToList();
             viewModel.urunler = db.urunler.ToList();
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
             viewModel.id = id;
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
+            viewModel.footer = db.footer.ToList();
+            viewModel.üstid = üstid;
+            return View("kategoriler", viewModel);
+        }
+        public ActionResult üstKategoriler(int id = 0)
+        {
+            ViewModel viewModel = new ViewModel();
+            viewModel.kategoriler = db.kategoriler.ToList();
+            viewModel.urunler = db.urunler.ToList();
+            viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.id = id;
+
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
             viewModel.footer = db.footer.ToList();
 
-            return View("kategoriler", viewModel);
+            return View("üstKategoriler", viewModel);
 
 
         }
@@ -62,6 +78,7 @@ namespace Uygunitem.Controllers
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
             viewModel.hakkimizda = db.hakkimizda.ToList();
             viewModel.footer = db.footer.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
             return View(viewModel);
         }
         public ActionResult ileti()
@@ -72,6 +89,7 @@ namespace Uygunitem.Controllers
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
             viewModel.hakkimizda = db.hakkimizda.ToList();
             viewModel.footer = db.footer.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
             return View(viewModel);
         }
 
@@ -84,6 +102,7 @@ namespace Uygunitem.Controllers
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
             viewModel.hakkimizda = db.hakkimizda.ToList();
             viewModel.footer = db.footer.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
             mesaj model = new mesaj();
             model.ad = form["ad"].Trim();
             model.email = form["email"].Trim();
@@ -100,6 +119,7 @@ namespace Uygunitem.Controllers
             viewModel.kategoriler = db.kategoriler.ToList();
             viewModel.urunler = db.urunler.ToList();
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
             viewModel.cekilen_datalar = db.cekilen_datalar.ToList();
             viewModel.id = id;
             viewModel.footer = db.footer.ToList();
@@ -111,16 +131,17 @@ namespace Uygunitem.Controllers
             if (db.urunler.Where(x => x.urun_id == id).Count() != 0)
             {
                 viewModel.anahtarKelimeler = urunKontrol.parcala(db.urunler.Where(x => x.urun_id == id).Select(x => x.anahtar_kelimeler).FirstOrDefault());
-                var ürünler = db.cekilen_datalar.Where(x => viewModel.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).OrderBy(x => x.cekilen_fiyat);
+                var ürünler = db.cekilen_datalar.Where(x => viewModel.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).OrderBy(x => x.cekilen_tarih);
                 
                 foreach (var item in ürünler)
                 {
-                    if(viewModel.tablo.ContainsKey(item.cekilen_firma))
+                    viewModel.urunKelimeler = urunKontrol.parcalaUrun(item.cekilen_isim);
+                    if(viewModel.tablo.ContainsKey(item.cekilen_firma)&& viewModel.anahtarKelimeler.All(a => viewModel.urunKelimeler.Any(c => c.Equals(a))))
                     {
                         string gfiyat = item.cekilen_fiyat.ToString();
                         viewModel.tablo[item.cekilen_firma] += gfiyat.Replace(",",".")+",";
                     }
-                    else
+                    else if(viewModel.anahtarKelimeler.All(a => viewModel.urunKelimeler.Any(c => c.Equals(a))))
                     {
                         string gfiyat = item.cekilen_fiyat.ToString();
                         viewModel.tablo.Add(item.cekilen_firma, gfiyat.Replace(",", ".") + ",");
@@ -136,12 +157,13 @@ namespace Uygunitem.Controllers
         public ActionResult urunDetay(FormCollection yorumform, int id = 0)
         {
             yorumlar model = new yorumlar();
-
             model.isim = yorumform["yorum_ad"].Trim();
             model.mail = yorumform["yorum_email"].Trim();
             model.yorum = yorumform["yorum_yorum"].Trim();
             model.tarih = DateTime.Now;
             model.urun_id = id;
+            model.yorumDurum = 0;
+            model.urun_isim = db.urunler.Where(x => x.urun_id == id).Select(x => x.urun_isim).Single();
             db.yorumlar.Add(model);
             db.SaveChanges();
             ViewModel viewModel = new ViewModel();
@@ -150,6 +172,7 @@ namespace Uygunitem.Controllers
             viewModel.urunler = db.urunler.ToList();
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
             viewModel.cekilen_datalar = db.cekilen_datalar.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
             viewModel.id = id;
             viewModel.footer = db.footer.ToList();
             viewModel.yorumlar = db.yorumlar.ToList();
@@ -174,6 +197,7 @@ namespace Uygunitem.Controllers
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
             viewModel.cekilen_datalar = db.cekilen_datalar.ToList();
             viewModel.uruntakip = db.uruntakip.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
             viewModel.sponsorlar = db.sponsorlar.ToList();
             viewModel.id = id;
             viewModel.footer = db.footer.ToList();
@@ -204,6 +228,7 @@ namespace Uygunitem.Controllers
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
             viewModel.cekilen_datalar = db.cekilen_datalar.ToList();
             viewModel.sponsorlar = db.sponsorlar.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList();
             viewModel.uruntakip = db.uruntakip.ToList();
             viewModel.id = id;
             viewModel.footer = db.footer.ToList();
@@ -240,6 +265,7 @@ namespace Uygunitem.Controllers
             viewModel.kategoriler = db.kategoriler.ToList();
             viewModel.urunler = db.urunler.ToList();
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.menuKategoriler = db.menuKategoriler.ToList(); 
             viewModel.footer = db.footer.ToList();
             string aramaText = form["searchtext"].Trim();
             string[] aramaListe = aramaText.Split(' ');

@@ -6,8 +6,8 @@ using System.Web;
 
 namespace Uygunitem.Models
 {
-   public class ViewModel
-   {
+    public class ViewModel
+    {
        public IEnumerable<urunler> urunler { get; set; }
         public IEnumerable<kategoriler> kategoriler { get; set; }
         public IEnumerable<alt_kategoriler> alt_kategoriler { get; set; }
@@ -21,14 +21,15 @@ namespace Uygunitem.Models
         public IEnumerable<uruntakip>uruntakip { get; set; }
         public IEnumerable<hataliUrunler> hataliUrunler { get; set; }
         public IEnumerable<sponsorlar> sponsorlar { get; set; }
+        public IEnumerable<menuKategoriler> menuKategoriler { get; set; }
         public string[] anahtarKelimeler { get; set; }
-
+        public string[] urunKelimeler { get; set; }
         public int id { get; set; }
-
+        public int üstid { get; set; }
         public IEnumerable firmalar { get; set; }
         public urunler urunGetir { get; set; }
         public kategoriler kategoriGetir { get; set; }
-
+        public menuKategoriler menukategoriGetir { get; set; }
         public alt_kategoriler altkategoriGetir { get; set; }
         public string hatamesaj { get; set; }
         public string üstkstring { get; set; }

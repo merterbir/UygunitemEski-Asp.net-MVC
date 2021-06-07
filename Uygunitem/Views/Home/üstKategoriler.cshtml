@@ -1,10 +1,10 @@
 ﻿@model Uygunitem.Models.ViewModel
-@if (@Model.alt_kategoriler.Where(x => x.altkate_id == Model.id).Count() != 0)
+@if (@Model.kategoriler.Where(x => x.kate_id == Model.id).Count() != 0)
 {
-    <h4> @Model.alt_kategoriler.Where(x => x.altkate_id == Model.id).Select(x => x.altkate_isim).FirstOrDefault() Alt Kategorisine ait ürünler listeleniyor </h4>
+    <h4> @Model.alt_kategoriler.Where(x => x.altkate_id == Model.id).Select(x => x.altkate_isim).FirstOrDefault() Kategorisine ait ürünler listeleniyor </h4>
     <br>
         <ul class="thumbnails">
-            @foreach (var urun in Model.urunler.Where(x => x.altkate_id == Model.id).Where(x=> x.üstkate_id ==Model.üstid))
+            @foreach (var urun in Model.urunler.Where(x => x.üstkate_id == Model.id))
             {
                 <li class="span3">
                     <div class="thumbnail">
@@ -19,14 +19,14 @@
             }
         </ul>
 
-        if (Model.urunler.Where(x => x.altkate_id == Model.id).Count() == 0)
+        if (Model.urunler.Where(x => x.üstkate_id == Model.id).Count() == 0)
         {
 
         <div class="caption">
             <br>
             <br>
             <img style="width:25%; display:block; margin: 0 auto;" src="~/themes/images/sadrobot.jpg" />
-            <h3 style="text-align:center">Üzgünüm, bu alt kategoride şuanlık ürün yok :/</h3>
+            <h3 style="text-align:center">Üzgünüm, bu kategoride şuanlık ürün yok :/</h3>
         </div>
         }
         }
@@ -36,7 +36,7 @@
             <br>
             <br>
             <img style="width:25%; display:block; margin: 0 auto;" src="~/themes/images/sadrobot.jpg" />
-            <h3 style="text-align:center">Üzgünüm, şuanlık böyle bir alt kategori yok :/</h3>
+            <h3 style="text-align:center">Üzgünüm, şuanlık böyle bir kategori yok :/</h3>
         </div>
 
         }

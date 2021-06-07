@@ -12,9 +12,10 @@ namespace Uygunitem
     using System;
     using System.Collections.Generic;
     
-    public partial class hakkimizda
+    public partial class menuKategoriler
     {
-        public int satir_id { get; set; }
-        public string satirlar { get; set; }
+        public int idAnaKate { get; set; }
+        public int AnasayfaKateId { get; set; }
+        public string AnasayfaKateIsım { get; set; }
     }
 }

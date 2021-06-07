@@ -1,0 +1,46 @@
+﻿@model Uygunitem.Models.ViewModel
+@{
+    ViewBag.Title = "kategoriEkle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="testbox">
+
+    <fieldset>
+        @using (Html.BeginForm("menukategoriEkleform", "Admin", FormMethod.Post, new { @class = "urunEkle" }))
+        {
+            <br />
+            <legend>MENU KATEGORİ EKLE</legend>
+            <br />
+            <div class="item">
+                <label for="name" style="color:black;">MENU KATEGORİ SEÇİNİZ<span>*</span></label><br /><br />
+
+
+
+
+            </div>
+            <div class="item">
+                <select name="select1" id="select1" required>
+                    <option selected value="" disabled>Üst Kategori</option>
+                    @foreach (var item in Model.kategoriler.Where(x => Model.menuKategoriler.All(a => a.AnasayfaKateId != x.kate_id)))
+                    {
+                        <option value="@item.kate_id">@item.kate_isim</option>
+                    }
+
+                </select>
+            </div> 
+                if (Model.hatamesaj == "Menuye Kategori Ekleme Başarılı!")
+                {
+                <h3 style="color:greenyellow">@Model.hatamesaj</h3>
+                }
+                else
+                {
+                <h3 style="color:red">@Model.hatamesaj</h3>
+                }
+
+                <div class="btn-block">
+                    <button type="submit">GÖNDER</button>
+                </div><br />
+                }
+
+        </fieldset>
+</div>
