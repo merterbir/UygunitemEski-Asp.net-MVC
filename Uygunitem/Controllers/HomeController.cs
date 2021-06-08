@@ -126,6 +126,7 @@ namespace Uygunitem.Controllers
             viewModel.yorumlar = db.yorumlar.ToList();
             viewModel.hataliUrunler = db.hataliUrunler.ToList();
             viewModel.sponsorlar = db.sponsorlar.ToList();
+
             viewModel.tablo = new Dictionary<string, string>();
 
             if (db.urunler.Where(x => x.urun_id == id).Count() != 0)
@@ -162,6 +163,7 @@ namespace Uygunitem.Controllers
             model.yorum = yorumform["yorum_yorum"].Trim();
             model.tarih = DateTime.Now;
             model.urun_id = id;
+
             model.yorumDurum = 0;
             model.urun_isim = db.urunler.Where(x => x.urun_id == id).Select(x => x.urun_isim).Single();
             db.yorumlar.Add(model);
@@ -171,7 +173,9 @@ namespace Uygunitem.Controllers
             viewModel.kategoriler = db.kategoriler.ToList();
             viewModel.urunler = db.urunler.ToList();
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
+            viewModel.tablo = new Dictionary<string, string>();
             viewModel.cekilen_datalar = db.cekilen_datalar.ToList();
+            viewModel.sorgu = true; 
             viewModel.menuKategoriler = db.menuKategoriler.ToList();
             viewModel.id = id;
             viewModel.footer = db.footer.ToList();
@@ -181,9 +185,28 @@ namespace Uygunitem.Controllers
             {
                 viewModel.anahtarKelimeler = urunKontrol.parcala(db.urunler.Where(x => x.urun_id == id).Select(x => x.anahtar_kelimeler).FirstOrDefault());
             }
+            if (db.urunler.Where(x => x.urun_id == id).Count() != 0)
+            {
+                viewModel.anahtarKelimeler = urunKontrol.parcala(db.urunler.Where(x => x.urun_id == id).Select(x => x.anahtar_kelimeler).FirstOrDefault());
+                var ürünler = db.cekilen_datalar.Where(x => viewModel.anahtarKelimeler.All(a => x.cekilen_isim.Contains(a))).OrderBy(x => x.cekilen_tarih);
 
+                foreach (var item in ürünler)
+                {
+                    viewModel.urunKelimeler = urunKontrol.parcalaUrun(item.cekilen_isim);
+                    if (viewModel.tablo.ContainsKey(item.cekilen_firma) && viewModel.anahtarKelimeler.All(a => viewModel.urunKelimeler.Any(c => c.Equals(a))))
+                    {
+                        string gfiyat = item.cekilen_fiyat.ToString();
+                        viewModel.tablo[item.cekilen_firma] += gfiyat.Replace(",", ".") + ",";
+                    }
+                    else if (viewModel.anahtarKelimeler.All(a => viewModel.urunKelimeler.Any(c => c.Equals(a))))
+                    {
+                        string gfiyat = item.cekilen_fiyat.ToString();
+                        viewModel.tablo.Add(item.cekilen_firma, gfiyat.Replace(",", ".") + ",");
+                    }
+                }
+            }
 
-            return RedirectToAction("urunDetay", new { id = id });
+            return View("urunDetay",viewModel);
 
         }
 
@@ -234,6 +257,7 @@ namespace Uygunitem.Controllers
             viewModel.footer = db.footer.ToList();
             viewModel.yorumlar = db.yorumlar.ToList();
             viewModel.hataliUrunler = db.hataliUrunler.ToList();
+            
             if (db.urunler.Where(x => x.urun_id == id).Count() != 0)
             {
                 viewModel.anahtarKelimeler = urunKontrol.parcala(db.urunler.Where(x => x.urun_id == id).Select(x => x.anahtar_kelimeler).FirstOrDefault());

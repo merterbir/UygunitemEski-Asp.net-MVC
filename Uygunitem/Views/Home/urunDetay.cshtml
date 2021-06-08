@@ -90,7 +90,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                             
+
                             @foreach (var item in Model.cekilen_datalar.Where(x => Model.anahtarKelimeler.All(a => urunKontrol.parcalaUrun(x.cekilen_isim).Any(c => c.Equals(a)))).Where(x => x.cekilen_durum == 1).Where(x => Model.sponsorlar.Any(a => a.sponsor_firmalink.Contains(x.cekilen_url))).OrderBy(x => x.cekilen_fiyat))
                             {
                                 <tr>
@@ -109,7 +109,7 @@
                                         <a href="@item.cekilen_url" target="_blank" class="fas fa-shopping-cart fa-lg">     SATICIYA GİT </a>
                                     </td>
                                     <td style="text-align:center;vertical-align:middle;background-color:#FFB233;position:relative">
-                                        @using (Html.BeginForm("hataliUrun", "Home", new { dbSatir = item.cekilen_data_id,id = Model.id}, FormMethod.Post))
+                                        @using (Html.BeginForm("hataliUrun", "Home", new { dbSatir = item.cekilen_data_id, id = Model.id }, FormMethod.Post))
                                         {
 
                                             <button type="submit" class="fa fa-exclamation-circle fa-3x" style="color:#AF4A35;"></button>
@@ -119,8 +119,8 @@
                                         <img src="~/themes/images/sponsorlu.png" aria-hidden="true" align="right" vertical-align="top" style="position: absolute; top: -15px; right: -15px; height: 50px; width: 50px;" />
                                     </td>
                                 </tr>
-                                }
-                            
+                            }
+
                             @foreach (var item in Model.cekilen_datalar.Where(x => Model.anahtarKelimeler.All(a => urunKontrol.parcalaUrun(x.cekilen_isim).Any(c => c.Equals(a)))).Where(x => x.cekilen_durum == 1).Where(x => !Model.sponsorlar.Any(a => a.sponsor_firmalink.Contains(x.cekilen_url))).OrderBy(x => x.cekilen_fiyat))
                             {
                                 <tr>
@@ -139,9 +139,9 @@
                                         <a href="@item.cekilen_url" target="_blank" class="fas fa-shopping-cart fa-lg">     SATICIYA GİT </a>
                                     </td>
                                     <td style="text-align:center;vertical-align:middle">
-                                        @using (Html.BeginForm("hataliUrun", "Home", new { dbSatir = item.cekilen_data_id, id = Model.id}, FormMethod.Post))
+                                        @using (Html.BeginForm("hataliUrun", "Home", new { dbSatir = item.cekilen_data_id, id = Model.id }, FormMethod.Post))
                                         {
-                                            <button type="submit" class ="fa fa-exclamation-circle fa-3x" style="color:#AF4A35;"></button>
+                                            <button type="submit" class="fa fa-exclamation-circle fa-3x" style="color:#AF4A35;"></button>
                                         }
                                     </td>
                                 </tr>
@@ -199,42 +199,63 @@
     }
     <hr class="soft clr" />
     @*-----------------Ürün Yorum İnputu-----------------*@
-<form class="form-block " method="post"> 
-    <table>
-        <tr>
-            <td>
-                <div class="form-group wrap-input100 validate-input" data-validate="İsim Giriniz" style="margin-top:15px; width:15%; ">
-                    <input class="input100" type="text" name="yorum_ad" placeholder="İsim" style="width:600%; background-color:#F6F6F7; color:black;" required>
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </span>
+    <form class="form-block " method="post">
+        <table>
+            <tr>
+                <td>
+                    <div class="form-group wrap-input100 validate-input" data-validate="İsim Giriniz" style="margin-top:15px; width:15%; ">
+                        <input class="input100" type="text" name="yorum_ad" placeholder="İsim" style="width:600%; background-color:#F6F6F7; color:black;" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </td>
+                <td a>
+                    <div class="form-group wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz" style="margin-top:15px; width:15%;">
+                        <input class="input100" type="email" name="yorum_email" placeholder="Email" style="width:600%; background-color:#F6F6F7; color:black;" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <textarea class="be-comment-text" name="yorum_yorum" rows="10" placeholder="YORUMUNUZ" style="width:100%; resize:none; color:black;" required></textarea>
+        <div class="container-contact100-form-btn">
+            <button id="yorumButon" class="buttonpop">
+                GÖNDER
+            </button>
+            @if (Model.sorgu == true)
+            {
+        <div id="popup3" class="overlays" style="z-index:3;" >
+            <div class="popups">
+                <h2>Uygunitem Yönetim</h2>
+                <a class="close" href="/Home/urunDetay/@Model.id">&times;</a>
+                <div class="contents">
+                    <br />
+                   Yorumunuz Admin Tarafından Onaylandıktan Sonra Görüntülenecektir.
                 </div>
-            </td>
-            <td a>
-                <div class="form-group wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz" style="margin-top:15px; width:15%;">
-                    <input class="input100" type="email" name="yorum_email" placeholder="Email" style="width:600%; background-color:#F6F6F7; color:black;" required>
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                    </span>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <br />
-    <textarea class="be-comment-text" name="yorum_yorum" rows="10" placeholder="YORUMUNUZ" style="width:100%; resize:none; color:black;" required></textarea>
-    <div class="container-contact100-form-btn">
-        <button id="yorumButon" class="contact100-form-btn">
-            GÖNDER
-        </button>
-    </div>
-</form>
-
+            </div>
+        </div>
+        }
+        @*<div class="boxin">
+        <a id="yorumButon" class="buttonpop" href="#popup3">Gönder</a>
+    </div>*@
+        </div>
+    </form>
+  
 
 
 
     @*-----------------Modal popuplar------------*@
+
+
+
+
+ 
 
     @*-----------------Ürün takip------------ *@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -244,7 +265,7 @@
                     <div class="column1" id="main1">
                         <h1>Ürün Takİp Formu </h1><br /> <br />
 
-                        @using (Html.BeginForm("urunTakip", "Home", new { id = Model.id}, FormMethod.Post))
+                        @using (Html.BeginForm("urunTakip", "Home", new { id = Model.id }, FormMethod.Post))
                         {
                             <form class="contact100-form" method="post">
                                 <div class="wrap-input100 validate-input" data-validate="Name is required">
@@ -283,7 +304,7 @@
 
     @*-----------------Hatalı Urun Tesekkur Popup------------*@
 
-    <div id="ad" class="modal1"  tabindex="-1" align="center" style="position:fixed">
+    <div id="ad" class="modal1" tabindex="-1" align="center" style="position:fixed">
         <div class="modal__content1">
             <h1 style="color:white">Hata Bildirimi gönderdiğiniz için teşekkür ederiz. En kısa sürede kontrol edeceğiz.</h1>
 

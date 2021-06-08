@@ -44,6 +44,7 @@ namespace Uygunitem.Models
         public IQueryable<urunler> arananUrunler { get; set; }
         public IEnumerable<SelectListItem> üstKategoriler { get; set; }
         public IEnumerable<SelectListItem> altKategoriler { get; set; }
+        public Boolean sorgu { get; set; }
 
 
     }
