@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="flex-container">
+    <div class="content-container">
+        <div class="form-container">
+            @using (Html.BeginForm("alogin", "Login", new { FormMethod.Post }))
+            {
+                <h1>
+                    Login
+                </h1>
+                <br>
+                <br>
+                <span class="subtitle">USERNAME:</span>
+                <br>
+                <input type="text" name="username">
+                <br>
+                <span class="subtitle">PASSWORD:</span>
+                <br>
+                <input type="password" name="password">
+                <br><br>
+                <input type="submit" value="SUBMIT" class="submit-btn">
+            }
+
+
+        </div>
+        @if (ViewBag.hata != null)
+        {
+            <div>
+                <h3 style="color:maroon;text-align:center">@ViewBag.hata</h3>
+            </div>
+        }
+    </div>
+</div>
+<link rel="stylesheet" href="~/themes/admincss/adminlogin.css">

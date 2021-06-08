@@ -45,6 +45,7 @@ namespace Uygunitem.Models
         public IEnumerable<SelectListItem> üstKategoriler { get; set; }
         public IEnumerable<SelectListItem> altKategoriler { get; set; }
         public Boolean sorgu { get; set; }
+        public IEnumerable<adminListesi> adminListesi { get; set; }
 
 
     }

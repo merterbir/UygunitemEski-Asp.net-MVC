@@ -22,6 +22,7 @@
         <AssociationConnector Association="uygunitemModel.FK_alt_kategoriler_kategoriler" ManuallyRouted="false" />
         <AssociationConnector Association="uygunitemModel.FK_urunler_alt_kategoriler" ManuallyRouted="false" />
         <AssociationConnector Association="uygunitemModel.FK_urunler_kategoriler" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="uygunitemModel.adminListesi" Width="1.5" PointX="0.75" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

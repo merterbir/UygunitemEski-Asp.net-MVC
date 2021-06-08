@@ -39,5 +39,6 @@ namespace Uygunitem
         public virtual DbSet<urunler> urunler { get; set; }
         public virtual DbSet<uruntakip> uruntakip { get; set; }
         public virtual DbSet<yorumlar> yorumlar { get; set; }
+        public virtual DbSet<adminListesi> adminListesi { get; set; }
     }
 }

@@ -8,10 +8,13 @@ using Uygunitem.Models;
 
 namespace Uygunitem.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
+       
         // GET: Admin
         uygunitemdb db = new uygunitemdb();
+        [Authorize]
         public ActionResult Index()
         {
             ViewModel viewModel = new ViewModel();
@@ -26,6 +29,7 @@ namespace Uygunitem.Controllers
             viewModel.hataliUrunler = db.hataliUrunler.ToList();
             return View(viewModel);
         }
+        [Authorize]
         [HttpGet]
         public ActionResult urunEkleme()
         {
@@ -43,6 +47,7 @@ namespace Uygunitem.Controllers
             viewModel.altKategoriler = new SelectList(db.alt_kategoriler, "altkate_id", "altkate_isim");
             return View(viewModel);
         }
+        [Authorize]
         public ActionResult urunDuzenleme()
         {
             ViewModel viewModel = new ViewModel();
@@ -57,6 +62,7 @@ namespace Uygunitem.Controllers
             viewModel.hataliUrunler = db.hataliUrunler.ToList();
             return View(viewModel);
         }
+        [Authorize]
         [HttpPost]
         public ActionResult fotoYukleme(HttpPostedFileBase file,FormCollection form)
         {
@@ -126,7 +132,7 @@ namespace Uygunitem.Controllers
             
             return View("urunEkleme",viewModel);
         }
-        
+        [Authorize]
         public ActionResult urunGetir(int id)
         {
             ViewModel viewModel = new ViewModel();
@@ -143,6 +149,7 @@ namespace Uygunitem.Controllers
             viewModel.urunGetir = urun;
             return View("urunGetir", viewModel);
         }
+        [Authorize]
         public ActionResult kategoriEkle()
         {
             ViewModel viewModel = new ViewModel();
@@ -153,6 +160,7 @@ namespace Uygunitem.Controllers
             return View("kategoriEkle",viewModel);
             
         }
+        [Authorize]
         [HttpPost]
         public ActionResult kategoriEkleform(FormCollection form)
         {
@@ -179,6 +187,7 @@ namespace Uygunitem.Controllers
            
             return View("kategoriEkle",viewModel);
         }
+        [Authorize]
         public ActionResult AltkategoriEkle()
         {
             ViewModel viewModel = new ViewModel();
@@ -189,6 +198,7 @@ namespace Uygunitem.Controllers
 
             return View("AltkategoriEkle",viewModel);
         }
+        [Authorize]
         [HttpPost]
         public ActionResult altkategoriEkleform(FormCollection form)
         {
@@ -217,7 +227,7 @@ namespace Uygunitem.Controllers
 
             return View("AltkategoriEkle", viewModel);
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult urunGuncelle(ViewModel p1)
         {
@@ -231,12 +241,14 @@ namespace Uygunitem.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [Authorize]
         public ActionResult kategoriDuzenleme()
         {
             ViewModel viewModel = new ViewModel();
             viewModel.kategoriler = db.kategoriler.ToList();
             return View("kategoriDuzenleme",viewModel);
         }
+        [Authorize]
         public ActionResult kategoriGetir(int id)
         {
             ViewModel viewModel = new ViewModel();
@@ -246,6 +258,7 @@ namespace Uygunitem.Controllers
             viewModel.kategoriGetir = kategori;
             return View("kategoriGetir", viewModel);
         }
+        [Authorize]
         [HttpPost]
         public ActionResult kategoriGuncelle(ViewModel p1)
         {
@@ -271,12 +284,14 @@ namespace Uygunitem.Controllers
            
             return View("kategoriGetir",viewModel);
         }
+        [Authorize]
         public ActionResult altkategoriDuzenleme()
         {
             ViewModel viewModel = new ViewModel();
             viewModel.alt_kategoriler = db.alt_kategoriler.ToList();
             return View("altkategoriDuzenleme", viewModel);
         }
+        [Authorize]
         public ActionResult altkategoriGetir(int id)
         {
             ViewModel viewModel = new ViewModel();
@@ -289,6 +304,7 @@ namespace Uygunitem.Controllers
             viewModel.üstkint = db.kategoriler.Where(x => x.kate_id == altkategori.üstkate_id).Select(x => x.kate_id).FirstOrDefault();
             return View("altkategoriGetir", viewModel);
         }
+        [Authorize]
         [HttpPost]
         public ActionResult altkategoriGuncelle(ViewModel p1,FormCollection form)
         {
@@ -321,6 +337,7 @@ namespace Uygunitem.Controllers
 
             return View("altkategoriGetir",viewModel);
         }
+        [Authorize]
         public ActionResult menuKategoriEkle()
         {
             ViewModel viewModel = new ViewModel();
@@ -332,6 +349,7 @@ namespace Uygunitem.Controllers
             return View("menukategoriEkle", viewModel);
 
         }
+        [Authorize]
         [HttpPost]
         public ActionResult menukategoriEkleform(FormCollection form)
         {
@@ -361,6 +379,7 @@ namespace Uygunitem.Controllers
 
             return RedirectToAction("menuKategoriEkle");
         }
+        [Authorize]
         public ActionResult menukategoriDuzenleme()
         {
             ViewModel viewModel = new ViewModel();
@@ -368,6 +387,7 @@ namespace Uygunitem.Controllers
             viewModel.menuKategoriler = db.menuKategoriler.ToList();
             return View("menukategoriDuzenleme", viewModel);
         }
+        [Authorize]
         public ActionResult menuKategoriSil(int id)
         {
             ViewModel viewModel = new ViewModel();
@@ -378,6 +398,7 @@ namespace Uygunitem.Controllers
             db.SaveChanges();
             return RedirectToAction("menukategoriDuzenleme");
         }
+        [Authorize]
         public JsonResult altKateGetir(int p)
         {
             var altKategoriler = (from x in db.alt_kategoriler

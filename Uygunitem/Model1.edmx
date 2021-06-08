@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="uygunitemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="uygunitemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="adminListesi">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="admin_kadi" Type="varchar(max)" Nullable="false" />
+          <Property Name="admin_sifre" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="alt_kategoriler">
           <Key>
             <PropertyRef Name="altkate_id" />
@@ -178,6 +186,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="uygunitemModelStoreContainer">
+          <EntitySet Name="adminListesi" EntityType="Self.adminListesi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="alt_kategoriler" EntityType="Self.alt_kategoriler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cekilen_datalar" EntityType="Self.cekilen_datalar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="data_siteler" EntityType="Self.data_siteler" Schema="dbo" store:Type="Tables" />
@@ -205,8 +214,7 @@
             <End Role="urunler" EntitySet="urunler" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="uygunitemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -415,7 +423,16 @@
             <End Role="kategoriler" EntitySet="kategoriler" />
             <End Role="urunler" EntitySet="urunler" />
           </AssociationSet>
+          <EntitySet Name="adminListesi" EntityType="uygunitemModel.adminListesi" />
         </EntityContainer>
+        <EntityType Name="adminListesi">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="admin_kadi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="admin_sifre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -569,6 +586,15 @@
                 <ScalarProperty Name="isim" ColumnName="isim" />
                 <ScalarProperty Name="urun_isim" ColumnName="urun_isim" />
                 <ScalarProperty Name="yorumDurum" ColumnName="yorumDurum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="adminListesi">
+            <EntityTypeMapping TypeName="uygunitemModel.adminListesi">
+              <MappingFragment StoreEntitySet="adminListesi">
+                <ScalarProperty Name="admin_sifre" ColumnName="admin_sifre" />
+                <ScalarProperty Name="admin_kadi" ColumnName="admin_kadi" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
