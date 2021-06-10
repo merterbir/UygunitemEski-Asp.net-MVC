@@ -4,25 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ec7a6bf1f40449759783f4a849ea4aa2" Name="Diagram1">
-        <EntityTypeShape EntityType="uygunitemModel.alt_kategoriler" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.cekilen_datalar" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.data_siteler" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.footer" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.hakkimizda" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.hataliUrunler" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.kategoriler" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.menuKategoriler" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.mesaj" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.sponsorlar" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.urunler" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.uruntakip" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="uygunitemModel.yorumlar" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="uygunitemModel.FK_alt_kategoriler_kategoriler" ManuallyRouted="false" />
-        <AssociationConnector Association="uygunitemModel.FK_urunler_alt_kategoriler" ManuallyRouted="false" />
-        <AssociationConnector Association="uygunitemModel.FK_urunler_kategoriler" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="uygunitemModel.adminListesi" Width="1.5" PointX="0.75" PointY="10.75" />
+      <Diagram DiagramId="8750183528834bcc98a1467ac85eddc9" Name="Diagram1">
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.adminListesi" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.alt_kategoriler" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.cekilen_datalar" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.data_siteler" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.footer" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.hakkimizda" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.hataliUrunler" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.kategoriler" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.menuKategoriler" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.mesaj" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.sponsorlar" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.urunler" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.uruntakip" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uygunite_uygunitemModel.yorumlar" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="uygunite_uygunitemModel.FK_alt_kategoriler_kategoriler" ManuallyRouted="false" />
+        <AssociationConnector Association="uygunite_uygunitemModel.FK_urunler_alt_kategoriler" ManuallyRouted="false" />
+        <AssociationConnector Association="uygunite_uygunitemModel.FK_urunler_kategoriler" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

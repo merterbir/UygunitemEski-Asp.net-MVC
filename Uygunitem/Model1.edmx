@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="uygunitemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="uygunite_uygunitemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="adminListesi">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -102,16 +102,6 @@
           <Property Name="sponsorluk_gunsuresi" Type="int" Nullable="false" />
           <Property Name="sponsorluk_baslangic" Type="date" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="urunler">
           <Key>
             <PropertyRef Name="urun_id" />
@@ -185,7 +175,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="uygunitemModelStoreContainer">
+        <EntityContainer Name="uygunite_uygunitemModelStoreContainer">
           <EntitySet Name="adminListesi" EntityType="Self.adminListesi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="alt_kategoriler" EntityType="Self.alt_kategoriler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cekilen_datalar" EntityType="Self.cekilen_datalar" Schema="dbo" store:Type="Tables" />
@@ -197,7 +187,6 @@
           <EntitySet Name="menuKategoriler" EntityType="Self.menuKategoriler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mesaj" EntityType="Self.mesaj" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sponsorlar" EntityType="Self.sponsorlar" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="urunler" EntityType="Self.urunler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="uruntakip" EntityType="Self.uruntakip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="yorumlar" EntityType="Self.yorumlar" Schema="dbo" store:Type="Tables" />
@@ -214,10 +203,19 @@
             <End Role="urunler" EntitySet="urunler" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="uygunitemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="uygunite_uygunitemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="adminListesi">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="admin_kadi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="admin_sifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityType Name="alt_kategoriler">
           <Key>
             <PropertyRef Name="altkate_id" />
@@ -311,16 +309,6 @@
           <Property Name="sponsorluk_gunsuresi" Type="Int32" Nullable="false" />
           <Property Name="sponsorluk_baslangic" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="urunler">
           <Key>
             <PropertyRef Name="urun_id" />
@@ -397,6 +385,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="uygunitemdb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="adminListesi" EntityType="Self.adminListesi" />
           <EntitySet Name="alt_kategoriler" EntityType="Self.alt_kategoriler" />
           <EntitySet Name="cekilen_datalar" EntityType="Self.cekilen_datalar" />
           <EntitySet Name="data_siteler" EntityType="Self.data_siteler" />
@@ -407,7 +396,6 @@
           <EntitySet Name="menuKategoriler" EntityType="Self.menuKategoriler" />
           <EntitySet Name="mesaj" EntityType="Self.mesaj" />
           <EntitySet Name="sponsorlar" EntityType="Self.sponsorlar" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="urunler" EntityType="Self.urunler" />
           <EntitySet Name="uruntakip" EntityType="Self.uruntakip" />
           <EntitySet Name="yorumlar" EntityType="Self.yorumlar" />
@@ -423,24 +411,24 @@
             <End Role="kategoriler" EntitySet="kategoriler" />
             <End Role="urunler" EntitySet="urunler" />
           </AssociationSet>
-          <EntitySet Name="adminListesi" EntityType="uygunitemModel.adminListesi" />
         </EntityContainer>
-        <EntityType Name="adminListesi">
-          <Key>
-            <PropertyRef Name="admin_id" />
-          </Key>
-          <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="admin_kadi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="admin_sifre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="uygunitemModelStoreContainer" CdmEntityContainer="uygunitemdb">
+        <EntityContainerMapping StorageEntityContainer="uygunite_uygunitemModelStoreContainer" CdmEntityContainer="uygunitemdb">
+          <EntitySetMapping Name="adminListesi">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.adminListesi">
+              <MappingFragment StoreEntitySet="adminListesi">
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="admin_kadi" ColumnName="admin_kadi" />
+                <ScalarProperty Name="admin_sifre" ColumnName="admin_sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="alt_kategoriler">
-            <EntityTypeMapping TypeName="uygunitemModel.alt_kategoriler">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.alt_kategoriler">
               <MappingFragment StoreEntitySet="alt_kategoriler">
                 <ScalarProperty Name="altkate_id" ColumnName="altkate_id" />
                 <ScalarProperty Name="altkate_isim" ColumnName="altkate_isim" />
@@ -449,7 +437,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="cekilen_datalar">
-            <EntityTypeMapping TypeName="uygunitemModel.cekilen_datalar">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.cekilen_datalar">
               <MappingFragment StoreEntitySet="cekilen_datalar">
                 <ScalarProperty Name="cekilen_data_id" ColumnName="cekilen_data_id" />
                 <ScalarProperty Name="cekilen_isim" ColumnName="cekilen_isim" />
@@ -463,7 +451,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="data_siteler">
-            <EntityTypeMapping TypeName="uygunitemModel.data_siteler">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.data_siteler">
               <MappingFragment StoreEntitySet="data_siteler">
                 <ScalarProperty Name="data_site_id" ColumnName="data_site_id" />
                 <ScalarProperty Name="data_site_url" ColumnName="data_site_url" />
@@ -471,7 +459,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="footer">
-            <EntityTypeMapping TypeName="uygunitemModel.footer">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.footer">
               <MappingFragment StoreEntitySet="footer">
                 <ScalarProperty Name="satir_id" ColumnName="satir_id" />
                 <ScalarProperty Name="menu_isim" ColumnName="menu_isim" />
@@ -480,7 +468,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="hakkimizda">
-            <EntityTypeMapping TypeName="uygunitemModel.hakkimizda">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.hakkimizda">
               <MappingFragment StoreEntitySet="hakkimizda">
                 <ScalarProperty Name="satir_id" ColumnName="satir_id" />
                 <ScalarProperty Name="satirlar" ColumnName="satirlar" />
@@ -488,7 +476,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="hataliUrunler">
-            <EntityTypeMapping TypeName="uygunitemModel.hataliUrunler">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.hataliUrunler">
               <MappingFragment StoreEntitySet="hataliUrunler">
                 <ScalarProperty Name="hataliUrun_autoincr" ColumnName="hataliUrun_autoincr" />
                 <ScalarProperty Name="hataliUrun_id" ColumnName="hataliUrun_id" />
@@ -500,7 +488,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="kategoriler">
-            <EntityTypeMapping TypeName="uygunitemModel.kategoriler">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.kategoriler">
               <MappingFragment StoreEntitySet="kategoriler">
                 <ScalarProperty Name="kate_id" ColumnName="kate_id" />
                 <ScalarProperty Name="kate_isim" ColumnName="kate_isim" />
@@ -508,7 +496,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="menuKategoriler">
-            <EntityTypeMapping TypeName="uygunitemModel.menuKategoriler">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.menuKategoriler">
               <MappingFragment StoreEntitySet="menuKategoriler">
                 <ScalarProperty Name="idAnaKate" ColumnName="idAnaKate" />
                 <ScalarProperty Name="AnasayfaKateId" ColumnName="AnasayfaKateId" />
@@ -517,7 +505,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="mesaj">
-            <EntityTypeMapping TypeName="uygunitemModel.mesaj">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.mesaj">
               <MappingFragment StoreEntitySet="mesaj">
                 <ScalarProperty Name="mesaj_id" ColumnName="mesaj_id" />
                 <ScalarProperty Name="ad" ColumnName="ad" />
@@ -529,7 +517,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sponsorlar">
-            <EntityTypeMapping TypeName="uygunitemModel.sponsorlar">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.sponsorlar">
               <MappingFragment StoreEntitySet="sponsorlar">
                 <ScalarProperty Name="sponsor_autoincr" ColumnName="sponsor_autoincr" />
                 <ScalarProperty Name="sponsor_firmalink" ColumnName="sponsor_firmalink" />
@@ -538,19 +526,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="uygunitemModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="urunler">
-            <EntityTypeMapping TypeName="uygunitemModel.urunler">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.urunler">
               <MappingFragment StoreEntitySet="urunler">
                 <ScalarProperty Name="urun_id" ColumnName="urun_id" />
                 <ScalarProperty Name="urun_isim" ColumnName="urun_isim" />
@@ -563,7 +540,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="uruntakip">
-            <EntityTypeMapping TypeName="uygunitemModel.uruntakip">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.uruntakip">
               <MappingFragment StoreEntitySet="uruntakip">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="kullanici_mail" ColumnName="kullanici_mail" />
@@ -576,7 +553,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="yorumlar">
-            <EntityTypeMapping TypeName="uygunitemModel.yorumlar">
+            <EntityTypeMapping TypeName="uygunite_uygunitemModel.yorumlar">
               <MappingFragment StoreEntitySet="yorumlar">
                 <ScalarProperty Name="yorum_id" ColumnName="yorum_id" />
                 <ScalarProperty Name="urun_id" ColumnName="urun_id" />
@@ -586,15 +563,6 @@
                 <ScalarProperty Name="isim" ColumnName="isim" />
                 <ScalarProperty Name="urun_isim" ColumnName="urun_isim" />
                 <ScalarProperty Name="yorumDurum" ColumnName="yorumDurum" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="adminListesi">
-            <EntityTypeMapping TypeName="uygunitemModel.adminListesi">
-              <MappingFragment StoreEntitySet="adminListesi">
-                <ScalarProperty Name="admin_sifre" ColumnName="admin_sifre" />
-                <ScalarProperty Name="admin_kadi" ColumnName="admin_kadi" />
-                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

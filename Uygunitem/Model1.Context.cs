@@ -25,6 +25,7 @@ namespace Uygunitem
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<adminListesi> adminListesi { get; set; }
         public virtual DbSet<alt_kategoriler> alt_kategoriler { get; set; }
         public virtual DbSet<cekilen_datalar> cekilen_datalar { get; set; }
         public virtual DbSet<data_siteler> data_siteler { get; set; }
@@ -35,10 +36,8 @@ namespace Uygunitem
         public virtual DbSet<menuKategoriler> menuKategoriler { get; set; }
         public virtual DbSet<mesaj> mesaj { get; set; }
         public virtual DbSet<sponsorlar> sponsorlar { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<urunler> urunler { get; set; }
         public virtual DbSet<uruntakip> uruntakip { get; set; }
         public virtual DbSet<yorumlar> yorumlar { get; set; }
-        public virtual DbSet<adminListesi> adminListesi { get; set; }
     }
 }
